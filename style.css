@@ -210,3 +210,33 @@ body .chapter.roots-chapter .home-h{left:79%;top:35px}
 body .chapter.roots-chapter .home-node{width:42%;max-width:42%;min-width:0}
 body .chapter.roots-chapter .home-node small{line-height:1.6;margin-top:6px}
 @media(max-width:700px){body .chapter.roots-chapter .roots-constellation{height:150px}body .chapter.roots-chapter .home-node strong{font-size:23px}}
+
+/* Illuminated identity medallions: the profession is visible before and after touch. */
+body .chapter.intro .person-keepsake{width:220px;height:250px;max-width:100%;margin:0 auto 24px;border-radius:110px 110px 12px 12px;isolation:isolate}
+body .chapter.intro .person-keepsake .cameo-arch{inset:0;border-radius:110px 110px 12px 12px;background:radial-gradient(circle at 50% 35%,#fffdf2,#efe2c5);border:1px solid #ddc28b;transition:background .7s,box-shadow .7s;box-shadow:0 12px 35px #041f2355,0 0 0 6px #d9be8112}
+body .chapter.intro .person-keepsake .cameo-arch:before{inset:9px;border-radius:102px 102px 6px 6px;border-color:#ad8b4b66}
+body .chapter.intro .person-keepsake .cameo-arch:after{content:'✧';font-size:20px;top:16px;color:#947033}
+body .chapter.intro .cameo-kicker{position:absolute;top:47px;left:10px;right:10px;font:500 11px/1.5 'DM Sans',Arial,sans-serif;letter-spacing:2px;color:#71582d;transition:color .6s}
+body .chapter.intro .person-keepsake .cameo-initial{inset:65px 0 auto;height:90px;font-size:84px;color:#8a6832;transform:none}
+body .chapter.intro .person-keepsake .cameo-reveal{inset:68px 0 auto;height:85px;transform:translateY(8px) scale(.8)}
+body .chapter.intro .person-keepsake .cameo-reveal svg{width:85px;height:85px;stroke:#f4d68f;stroke-width:1.4;filter:drop-shadow(0 0 10px #e3bd6044)}
+body .chapter.intro .cameo-identity{position:absolute;left:12px;right:12px;top:164px;display:flex;flex-direction:column;gap:5px;transition:transform .6s}
+body .chapter.intro .person-keepsake .cameo-identity strong{font:600 25px/1.2 'DM Sans',Arial,sans-serif!important;color:#173e35!important;letter-spacing:1px;text-transform:uppercase}
+body .chapter.intro .cameo-identity small{font:500 12px/1.5 'DM Sans',Arial,sans-serif;color:#66512d;letter-spacing:.7px}
+body .chapter.intro .person-keepsake .cameo-cue{bottom:13px;color:#71582d;font-size:11px;letter-spacing:.6px}
+body .chapter.intro .person-keepsake .cameo-rays{inset:52px 22px auto;height:115px;opacity:.7;background:repeating-conic-gradient(from 0deg,#c4a36155 0deg 1deg,transparent 1deg 18deg)}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-arch{background:radial-gradient(ellipse at 50% 35%,#326456,#123d34 70%);box-shadow:0 0 0 6px #dac08b20,0 0 42px #d8b76a3b,0 14px 30px #041f2355}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-arch:before{border-color:#e0bf7888}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-arch:after,body .chapter.intro .person-keepsake.keepsake-open .cameo-kicker,body .chapter.intro .person-keepsake.keepsake-open .cameo-cue{color:#efd7a3}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-identity strong{color:#fff2cf!important}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-identity small{color:#ead9b4}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-initial{opacity:0;transform:scale(.7);filter:blur(3px)}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-reveal{opacity:1;transform:none}
+body .chapter.intro .person-keepsake.keepsake-open .cameo-rays{animation:identityHalo 8s linear infinite;opacity:1}
+@keyframes identityHalo{to{transform:rotate(360deg)}}
+/* The caption has its own flow below the entire botanical SVG. */
+body .chapter.blessing-garden .wreath-garden{display:flex;flex-direction:column;align-items:center;aspect-ratio:auto;gap:20px;height:auto;padding:0 0 6px}
+body .chapter.blessing-garden .wreath-garden svg{width:100%;height:auto;aspect-ratio:340/320;flex-shrink:0}
+body .chapter.blessing-garden .garden-touch-hint{position:static;inset:auto;display:block;width:100%;padding:0 5px;min-height:24px;font-size:13px;line-height:1.7;letter-spacing:.7px}
+body .chapter.blessing-garden .garden-status{margin-top:18px!important}
+@media(prefers-reduced-motion:reduce){body .chapter.intro .person-keepsake.keepsake-open .cameo-rays{animation:none}}

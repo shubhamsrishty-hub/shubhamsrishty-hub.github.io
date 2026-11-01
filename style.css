@@ -202,3 +202,11 @@ body .chapter.arrival-venue .arrival-art-note{
 }
 body .chapter.arrival-venue .arrival-footnote{flex:0 0 auto}
 body .chapter.arrival-venue .arrival-directions{flex-shrink:0;line-height:1.5}
+
+/* Two homes connected by one golden thread. */
+body .chapter.roots-chapter .roots-constellation{height:145px;margin-bottom:24px}
+body .chapter.roots-chapter .home-m{left:21%;top:35px}
+body .chapter.roots-chapter .home-h{left:79%;top:35px}
+body .chapter.roots-chapter .home-node{width:42%;max-width:42%;min-width:0}
+body .chapter.roots-chapter .home-node small{line-height:1.6;margin-top:6px}
+@media(max-width:700px){body .chapter.roots-chapter .roots-constellation{height:150px}body .chapter.roots-chapter .home-node strong{font-size:23px}}

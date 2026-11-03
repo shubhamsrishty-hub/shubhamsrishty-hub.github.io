@@ -56,3 +56,14 @@
 @keyframes rightGroundedStep{0%{transform:translateY(.3cqh)}12.5%{transform:translate(.08cqw,-.38cqh) rotate(3deg)}25%{transform:translate(.12cqw,-.67cqh) rotate(5deg)}37.5%{transform:translate(.06cqw,-.35cqh) rotate(2deg)}50%{transform:translateY(0)}75%{transform:translateY(.15cqh)}100%{transform:translateY(.3cqh)}}
 @keyframes walkingWeight{0%,50%,100%{transform:translateX(-.08cqw) rotate(-.25deg)}12.5%,62.5%{transform:translateY(-.13cqh)}25%,75%{transform:translateX(.08cqw) rotate(.25deg)}37.5%,87.5%{transform:translateY(-.13cqh)}}
 @media(prefers-reduced-motion:reduce){.dinner.active .groom-stage.is-walking,.groom-stage.is-walking .groom-leg,.groom-stage.is-walking .groom-paint{animation:none!important}}
+
+/* Walking is now driven frame-by-frame in card.js (perspective path + planted footfalls). */
+.dinner.active .groom-stage.is-walking,.groom-stage .groom-leg,.groom-stage .groom-paint{animation:none!important}
+.groom-stage{transform-origin:50% 99.2%;transition:none}
+.groom-figure{transform-origin:50% 99.2%}
+.groom-leg-left{transform-origin:48.3% 93.6%}
+.groom-leg-right{transform-origin:51.5% 93.6%}
+.groom-paint{transform:none}
+.dinner .card-art::after{content:'';position:absolute;left:36%;top:40%;width:28%;height:14%;border-radius:50%;background:radial-gradient(ellipse,#ffd98a55,#ffb84d22 45%,transparent 70%);opacity:0;pointer-events:none;mix-blend-mode:plus-lighter;transition:opacity 1.6s ease}
+.dinner.groom-arrived .card-art::after{opacity:1;animation:brideGlow 3.2s 1.6s ease-in-out infinite}
+@keyframes brideGlow{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}

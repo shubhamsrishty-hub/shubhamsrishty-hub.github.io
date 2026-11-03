@@ -63,3 +63,16 @@
 @keyframes gateRise{from{opacity:0;transform:translateY(4cqw) scale(.97)}to{opacity:1;transform:none}}
 @keyframes gateAway{to{opacity:0;transform:scale(1.08)}}
 @keyframes gateDrift{to{transform:scale(1.12) translateY(-1.5%)}}
+/* ---------- Event pages (Bhaat & Sangeet, Haldi) ---------- */
+.event .card-art{background-size:cover;background-position:center}
+.bhaat .card-art{background-image:url('clip-page-bhaat.jpg?v=1')}
+.haldi .card-art{background-image:url('clip-page-haldi.jpg?v=1')}
+.event .event-title{top:9.6%;font:10.5cqw/1.05 WeddingScript,cursive;color:#7a1f2b}
+.event .event-title span{font-size:8cqw;color:#a8742a}
+.event .event-date{top:18.6%;font:italic 600 4.9cqw/1.3 'Cormorant Garamond',Georgia,serif;color:#5a1712;font-variant-numeric:lining-nums}
+.event .event-line{font:500 3.55cqw/1.35 Cinzel,Georgia,serif;letter-spacing:.12cqw;color:#5a1712;font-variant-numeric:lining-nums}
+.event .event-line b{font-weight:600;color:#8a2430}
+.event .event-line-1{top:23.3%}
+.event .event-line-2{top:26.9%}
+.event h2,.event p{text-shadow:0 0 6px #fff4e6,0 0 14px #fff1dccc,0 0 26px #ffeedd99}
+.event .event-touch{left:6%;top:48%;width:88%;height:44%}

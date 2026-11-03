@@ -1,7 +1,7 @@
 // Each page plays its animated clip behind the text. If a clip can't load,
 // the page simply keeps its original painting and code animations.
 (()=>{
-const CLIPS={opening:'clip-page-1',family:'clip-page-2',dinner:'clip-page-3',venue:'clip-page-4'};
+const CLIPS={opening:'clip-page-1',family:'clip-page-2',bhaat:'clip-page-bhaat',haldi:'clip-page-haldi',dinner:'clip-page-3',venue:'clip-page-4'};
 const ONCE={dinner:true}; // the groom walks once and stays near the palace; tap him to replay
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cards=[...document.querySelectorAll('.card')];

@@ -1,10 +1,10 @@
-// Background music (Chaudhary, 1:10–1:45), looping softly.
+// Background music (Chaudhary, 0:59–1:46), looping softly.
 // Browsers only allow sound after the visitor touches the page, so the invite opens
 // with a "Tap to open" screen; that first tap starts the song. If a browser does allow
 // autoplay with sound, the music starts straight away and the screen opens by itself.
 (()=>{
 const btn=document.getElementById('music-toggle'),gate=document.getElementById('welcome-gate');
-const a=new Audio('wedding-music.mp3?v=1');a.loop=true;a.preload='auto';a.volume=0;
+const a=new Audio('wedding-music.mp3?v=2');a.loop=true;a.preload='auto';a.volume=0;
 let wanted=true,started=false,fadeTimer=null;
 function fadeTo(v,ms,done){clearInterval(fadeTimer);const s0=a.volume,t0=performance.now();
   fadeTimer=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);try{a.volume=s0+(v-s0)*k;}catch(e){}if(k>=1){clearInterval(fadeTimer);done&&done();}},40);}

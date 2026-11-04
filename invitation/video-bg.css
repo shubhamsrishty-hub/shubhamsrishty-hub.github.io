@@ -1,0 +1,92 @@
+.card-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.card.has-video .card-video{opacity:1}
+/* The clip already contains the scenery and its motion, so hide the painted layers drawn on top of the old artwork. */
+.card.has-video>:not(.card-art):not(.card-video):not(p):not(h1):not(h2):not(.opening-title):not(.bride-block):not(.groom-block):not(.art-touch):not(.groom-approach-touch):not(.dinner-elephant):not(.flying-butterfly):not(.rose-shower){visibility:hidden}
+.card.has-video .dinner-elephant,.card.has-video .flying-butterfly{opacity:0}
+.card.has-video .card-art::after{display:none}
+/* ---------- Page 3: details sit in the night sky above the palace ---------- */
+.dinner.has-video .dinner-title{top:2.8%;font-size:9cqw}
+.dinner.has-video .dinner-date{top:12.4%;left:3%;right:3%;white-space:nowrap;font:italic 600 4.5cqw/1.3 'Cormorant Garamond',Georgia,serif;letter-spacing:.05cqw}
+.dinner.has-video .dinner-venue{top:16.6%;font:600 4.4cqw/1.25 Cinzel,Georgia,serif;letter-spacing:.35cqw}
+.dinner.has-video .dinner-venue span{display:inline-block;font:italic 600 4.3cqw/1.25 'Cormorant Garamond',Georgia,serif;letter-spacing:.05cqw}
+.dinner.has-video p,.dinner.has-video h2{text-shadow:0 1px 3px #000a,0 0 16px #0009}
+.dinner.has-video::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,#070a1ef2 0,#070a1e99 3%,transparent 6.5%,transparent 93.5%,#070a1e99 97%,#070a1ef2 100%)}
+.dinner.has-video::after{content:'';position:absolute;inset:1.4% 2.4%;z-index:2;pointer-events:none;border:1px solid #d9b46a8c;border-radius:6px;box-shadow:inset 0 0 0 3px #00000000,inset 0 0 0 4px #d9b46a40}
+/* ---------- Page 4: elegant, larger, easy-to-read venue details ---------- */
+.venue .venue-title,.venue .venue-name,.venue .venue-address{left:6%!important;right:6%!important}
+.venue .venue-title{top:6.4%;font-size:11.5cqw;color:#fff3cf}
+.venue .venue-name{top:16.4%;font:600 5.6cqw/1.25 Cinzel,Georgia,serif;letter-spacing:.45cqw;color:#fffaf0}
+.venue .venue-address{top:22.4%;font:italic 600 5cqw/1.28 'Cormorant Garamond',Georgia,serif;color:#fff8e8}
+.venue .venue-evening{top:30.4%;left:6%!important;right:6%!important;font:600 3.9cqw/1.3 Cinzel,Georgia,serif!important;letter-spacing:.3cqw;color:#fff2c9}
+.venue h2,.venue p{text-shadow:0 1px 3px #0b1d42cc,0 0 18px #0b1d42aa}
+.venue.has-video::before{content:'';position:absolute;left:4%;right:4%;top:3%;height:35%;z-index:1;pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,#0c234d8c,#0c234d4d 45%,transparent 72%);filter:blur(6px)}
+/* ---------- Colour & numerals refinement ---------- */
+.card p,.card h2,.card span{font-variant-numeric:lining-nums}
+.dinner.has-video .dinner-title{color:#ffe7ae}
+.dinner.has-video .dinner-date{color:#fff6e2}
+.dinner.has-video .dinner-venue{color:#f3cf7a}
+.dinner.has-video .dinner-venue span{color:#fff1d6}
+.dinner.has-video .dinner-date{font-size:4.7cqw}
+.venue .venue-title{top:5.2%;font:12.5cqw/1 WeddingScript,cursive;color:#ffe9ad}
+.venue .venue-eyebrow{display:block;text-transform:uppercase;font:600 3.9cqw/1.6 Cinzel,Georgia,serif;letter-spacing:1.1cqw;color:#fff6e0;margin-bottom:.4cqw}
+.venue .venue-name{top:17.2%;color:#ffd77e}
+.venue .venue-address{top:23%;color:#fffaf0}
+.venue .venue-evening{top:31%;color:#ffe2a0}
+.venue h2,.venue p{text-shadow:0 1px 2px #0a1838e6,0 2px 10px #0a1838b3,0 0 22px #0a183899}
+/* ---------- Music button ---------- */
+.music-toggle{position:absolute;top:1.6%;left:3%;z-index:20;width:40px;height:40px;border-radius:50%;border:1px solid #e9cf96aa;background:#2a160fa6;color:#ffe7ae;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:0 2px 10px #0004;padding:0;touch-action:manipulation}
+.music-toggle .note{font:20px/1 Georgia,serif}
+.music-toggle .bars{display:none;gap:2px;align-items:flex-end;height:16px}
+.music-toggle .bars i{width:3px;background:#ffe7ae;border-radius:2px;animation:mbar .9s ease-in-out infinite}
+.music-toggle .bars i:nth-child(2){animation-delay:-.3s}.music-toggle .bars i:nth-child(3){animation-delay:-.6s}
+.music-toggle.playing .note{display:none}.music-toggle.playing .bars{display:flex}
+@keyframes mbar{0%,100%{height:4px}50%{height:16px}}
+/* ---------- Welcome screen: the tap that starts the music ---------- */
+.welcome-gate{position:absolute;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;border-radius:inherit;container-type:size;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.gate-bg{position:absolute;inset:-6%;background:url('clip-page-1.jpg?v=3') center/cover;filter:blur(5px) brightness(.85) saturate(1.15);transform:scale(1.05);animation:gateDrift 14s ease-in-out infinite alternate}
+.welcome-gate:after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#3a120e33,#1a080599 85%)}
+.gate-card{position:relative;z-index:1;width:78%;padding:9cqw 6cqw 8cqw;text-align:center;color:#fff3d6;border:1px solid #e3c27fb0;border-radius:46cqw 46cqw 3cqw 3cqw;background:linear-gradient(#3b1410cc,#24090add);box-shadow:0 0 0 5px #e3c27f22,0 20px 60px #000a;animation:gateRise 1.2s ease both}
+.gate-card p{position:static!important;margin:0}
+.gate-devotion{font:4cqw/1.4 Georgia,serif;color:#f1d595}
+.gate-small{margin-top:5cqw!important;font:600 2.9cqw/1.5 Cinzel,Georgia,serif;letter-spacing:.8cqw;color:#e8cf9a}
+.gate-names{margin-top:2cqw!important;font:13cqw/1.1 WeddingScript,cursive;color:#ffe7ae;text-shadow:0 2px 14px #000a}
+.gate-names span{display:block;font-size:8cqw;color:#f1d595}
+.gate-date{margin-top:3cqw!important;font:600 3.4cqw/1.5 Cinzel,Georgia,serif;letter-spacing:.6cqw;color:#fff3d6;font-variant-numeric:lining-nums}
+.gate-tap{display:inline-flex;align-items:center;gap:2cqw;margin-top:7cqw;padding:2.6cqw 5cqw;border-radius:40px;font:600 3.3cqw/1.2 Cinzel,Georgia,serif;letter-spacing:.25cqw;color:#2a0f08;background:linear-gradient(#f8e1a6,#d6a54e);box-shadow:0 0 0 0 #f1d59588;animation:gatePulse 2s ease-in-out infinite}
+.gate-icon{font:4.4cqw/1 Georgia,serif}
+.welcome-gate.open{pointer-events:none}
+.welcome-gate.open .gate-card{animation:gateAway .9s ease forwards}
+.welcome-gate.open .gate-bg,.welcome-gate.open:after{transition:opacity 1s ease;opacity:0}
+@keyframes gatePulse{50%{box-shadow:0 0 0 3cqw #f1d59500;transform:scale(1.04)}}
+@keyframes gateRise{from{opacity:0;transform:translateY(4cqw) scale(.97)}to{opacity:1;transform:none}}
+@keyframes gateAway{to{opacity:0;transform:scale(1.08)}}
+@keyframes gateDrift{to{transform:scale(1.12) translateY(-1.5%)}}
+/* ---------- Event pages (Bhaat & Sangeet, Haldi) ---------- */
+.event .card-art{background-size:cover;background-position:center}
+.bhaat .card-art{background-image:url('clip-page-bhaat.jpg?v=1')}
+.haldi .card-art{background-image:url('clip-page-haldi.jpg?v=1')}
+.event .event-title{top:12.2%;left:14%;right:14%;font:9.4cqw/1.05 WeddingScript,cursive;color:#7a1f2b}
+.event .event-title span{font-size:8cqw;color:#a8742a}
+.event .event-date{top:19.7%;font:italic 600 4.9cqw/1.3 'Cormorant Garamond',Georgia,serif;color:#5a1712;font-variant-numeric:lining-nums}
+.event .event-line{font:500 3.55cqw/1.35 Cinzel,Georgia,serif;letter-spacing:.12cqw;color:#5a1712;font-variant-numeric:lining-nums}
+.event .event-line b{font-weight:600;color:#8a2430}
+.event .event-line-1{top:23.9%}
+.event .event-line-2{top:27.2%}
+.event h2,.event p{text-shadow:0 0 6px #fff4e6,0 0 14px #fff1dccc,0 0 26px #ffeedd99}
+.event .event-touch{left:6%;top:48%;width:88%;height:44%}
+/* Bhaat & Sangeet: tighter stack with venue */
+.bhaat .event-title{top:11.4%}
+.bhaat .event-date{top:18.2%}
+.bhaat .event-venue{top:21.9%;font:italic 600 4.4cqw/1.3 'Cormorant Garamond',Georgia,serif;color:#8a2430}
+.bhaat .event-line{font-size:3.35cqw}
+.bhaat .event-line-1{top:25.3%}
+.bhaat .event-line-2{top:28.3%}
+/* Haldi */
+.haldi .event-title{top:11.6%;left:22%;right:22%;font-size:14cqw;color:#8a3b12}
+.haldi .event-date{top:20.6%;left:22%;right:22%;font-size:5cqw;line-height:1.2;color:#5a2410}
+.haldi .event-line-1{top:28.4%;font-size:4cqw;letter-spacing:.3cqw;color:#5a2410}
+.haldi .event-line-1 b{color:#8a3b12}
+.haldi .event-venue{top:32%;font:600 4.2cqw/1.3 Cinzel,Georgia,serif;letter-spacing:.25cqw;color:#8a2430}
+.haldi h2,.haldi p{text-shadow:0 0 6px #fffaf0,0 0 14px #fff6e4dd,0 0 28px #fff3dcaa}

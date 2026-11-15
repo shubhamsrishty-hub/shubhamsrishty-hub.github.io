@@ -11,7 +11,7 @@ probe('venue-map.jpg',()=>$('#venue-art').classList.add('has'));
 
 
 /* ---------------- music ---------------- */
-const music=$('#music'),audio=new Audio('wedding-music.mp3');audio.loop=true;audio.preload='auto';audio.volume=0;
+const music=$('#music'),audio=new Audio('wedding-music.mp3?v=2');audio.loop=true;audio.preload='auto';audio.volume=0;
 let wanted=true,fadeT=null;
 function fade(to,ms,done){clearInterval(fadeT);const s=audio.volume,t0=performance.now();fadeT=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);try{audio.volume=s+(to-s)*k}catch(e){}if(k>=1){clearInterval(fadeT);done&&done()}},40)}
 function mui(){const on=!audio.paused;music.classList.toggle('playing',on);music.setAttribute('aria-pressed',String(on));music.setAttribute('aria-label',on?'Pause music':'Play music')}

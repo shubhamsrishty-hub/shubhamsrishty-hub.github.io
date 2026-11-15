@@ -72,6 +72,33 @@ new IntersectionObserver(es=>es.forEach(e=>{if(!lit)return;e.isIntersecting?(her
 const cvid=$('#closing-video');
 new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cvid.preload='auto';cvid.play().catch(()=>{})}else cvid.pause()}),{threshold:.1}).observe(cvid);
 
+/* ---------------- Shiva–Parvati arch: falling petals ---------------- */
+(()=>{const pf=$('#petal-fall');if(!pf||reduce)return;const cols=['#ff9f1c','#ffd23f','#f7a6b4','#fff3d6','#ff7b54'];
+  for(let i=0;i<11;i++){const el=document.createElement('i');
+    el.style.cssText=`--x:${Math.round(Math.random()*96)}%;--t:${(10+Math.random()*7).toFixed(1)}s;--dl:${(-Math.random()*16).toFixed(1)}s;--c:${cols[i%5]};--sw:${Math.round(Math.random()*44-22)}px;--z:${(7+Math.random()*5).toFixed(1)}px`;pf.appendChild(el)}})();
+
+/* ---------------- invitation card: drawn frame, gold dust, written names ---------------- */
+(()=>{const card=$('#card');if(!card)return;
+  const svg=card.querySelector('.frame'),out=svg.querySelector('.f-out'),inn=svg.querySelector('.f-in'),beam=svg.querySelector('.f-beam'),cn=svg.querySelector('.f-cn');
+  function frame(){const w=card.offsetWidth,h=card.offsetHeight;if(!w||!h)return;const c=w/2,g=92;
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    const d=m=>`M${c+g} ${m}H${w-m}V${h-m}H${m}V${m}H${c-g}`;
+    out.setAttribute('d',d(3));inn.setAttribute('d',d(11));beam.setAttribute('d',d(3));
+    [out,inn].forEach(p=>p.style.setProperty('--L',Math.ceil(p.getTotalLength())));
+    const dm=(x,y)=>`M${x} ${y-5}L${x+5} ${y}L${x} ${y+5}L${x-5} ${y}Z`;
+    cn.setAttribute('d',dm(11,11)+dm(w-11,11)+dm(w-11,h-11)+dm(11,h-11));}
+  frame();addEventListener('resize',frame);
+  if(window.ResizeObserver)new ResizeObserver(frame).observe(card);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(frame);
+  // names are written word by word, in step with the rest of the card
+  card.querySelectorAll('.write').forEach(el=>{const s=+el.dataset.s||0,words=el.textContent.trim().split(/\s+/);el.textContent='';
+    words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(.5+(s+k*1.4)*.2).toFixed(2)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '))})});
+  // slow-rising gold dust
+  const motes=$('#motes');if(motes&&!reduce)for(let i=0;i<12;i++){const m=document.createElement('i');
+    m.style.cssText=`--x:${Math.round(4+Math.random()*92)}%;--t:${(11+Math.random()*9).toFixed(1)}s;--dl:${(-Math.random()*20).toFixed(1)}s;--z:${(2+Math.random()*2.5).toFixed(1)}px;--sw:${Math.round(Math.random()*30-15)}px`;motes.appendChild(m)}
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){card.classList.add('awake');o.disconnect()}}),{threshold:.22}).observe(card);
+})();
+
 /* ---------------- sparkles ---------------- */
 const cv=$('#sparkle'),cx=cv.getContext('2d');let parts=[],running=false,last=performance.now();
 function size(){const d=Math.min(2,devicePixelRatio||1);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0)}size();addEventListener('resize',size);

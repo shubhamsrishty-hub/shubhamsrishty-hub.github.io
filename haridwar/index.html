@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@500;600;700&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
-<link rel="stylesheet" href="style.css?v=19">
+<link rel="stylesheet" href="style.css?v=21">
 </head>
 <body class="locked">
 
@@ -60,17 +60,31 @@
 
   <!-- ============ BLESSING ARCH ============ -->
   <section class="sec blessing" id="blessing">
-    <div class="arch reveal">
+    <div class="arch reveal" id="arch">
+      <div class="rays" aria-hidden="true"></div>
+      <div class="aura" aria-hidden="true"></div>
       <svg class="arch-line" viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" aria-label="Shiva and Parvati">
-        <defs><clipPath id="archclip"><path d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440Z"/></clipPath></defs>
+        <defs>
+          <clipPath id="archclip"><path d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440Z"/></clipPath>
+        </defs>
         <image class="art-img" href="shiva-parvati.jpg" x="20" y="60" width="260" height="380" preserveAspectRatio="xMidYMid slice" clip-path="url(#archclip)"/>
         <path class="gold" d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440"/>
         <path d="M14 440V176C14 128 58 104 96 80C122 63 140 44 150 20C160 44 178 63 204 80C242 104 286 128 286 176V440" />
         <path class="in" d="M26 440V180C26 136 66 114 102 91C126 75 142 58 150 38C158 58 174 75 198 91C234 114 274 136 274 180V440" />
         <ellipse cx="150" cy="10" rx="3.2" ry="7" />
       </svg>
+      <svg class="arch-fx" viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <clipPath id="archclip2"><path d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440Z"/></clipPath>
+          <linearGradient id="sheenG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff6dc" stop-opacity=".34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g clip-path="url(#archclip2)"><rect class="sheen" x="-130" y="40" width="74" height="420" fill="url(#sheenG)"/></g>
+        <path class="beam" pathLength="100" d="M14 440V176C14 128 58 104 96 80C122 63 140 44 150 20C160 44 178 63 204 80C242 104 286 128 286 176V440"/>
+      </svg>
+      <div class="petal-fall" id="petal-fall" aria-hidden="true"></div>
+      <img class="lamp l" src="diya-lit.png" alt=""><img class="lamp r" src="diya-lit.png" alt="">
     </div>
-    <p class="hindi reveal">॥ ॐ नमः शिवाय ॥</p>
+    <p class="hindi mantra reveal">॥ ॐ नमः शिवाय ॥</p>
     <div class="orn reveal"></div>
     <div class="medallion reveal" id="medallion" aria-label="Srishty and Shubham monogram">
       <div class="m-glow"></div>
@@ -98,18 +112,21 @@
 
   <!-- ============ INVITATION CARD ============ -->
   <section class="sec card-sec">
-    <div class="card reveal">
-      <p class="lead">With the blessings of our elders,<br>you are invited to the wedding of</p>
-      <p class="script who">Srishty Chaudhary</p>
-      <p class="sc lbl">Daughter of</p>
-      <p class="sc parents">Smt. Anju Singh &amp;<br>Shri Surendra Singh Chahal</p>
-      <p class="script with">with</p>
-      <p class="sc lbl">Major</p>
-      <p class="script who">Shubham Singh Tomer</p>
-      <p class="sc lbl">Son of</p>
-      <p class="sc parents">Smt. Rupa Tomer &amp;<br>Shri Jagpal Tomer</p>
-      <p class="when">Thursday, 10 December 2026</p>
-      <p class="where">Hotel Hyatt Place, Bahadarabad, Haridwar</p>
+    <div class="card reveal" id="card">
+      <svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg>
+      <div class="crest" aria-hidden="true"></div>
+      <div class="motes" id="motes" aria-hidden="true"></div>
+      <p class="lead st" style="--s:0">With the blessings of our elders,<br>you are invited to the wedding of</p>
+      <p class="script who write" data-s="1">Srishty Chaudhary</p>
+      <p class="sc lbl st" style="--s:4">Daughter of</p>
+      <p class="sc parents st" style="--s:5">Smt. Anju Singh &amp;<br>Shri Surendra Singh Chahal</p>
+      <div class="with-row st" style="--s:7"><i></i><p class="script with">with</p><i></i></div>
+      <p class="sc lbl st" style="--s:8">Major</p>
+      <p class="script who write" data-s="9">Shubham Singh Tomer</p>
+      <p class="sc lbl st" style="--s:13">Son of</p>
+      <p class="sc parents st" style="--s:14">Smt. Rupa Tomer &amp;<br>Shri Jagpal Tomer</p>
+      <p class="when st" style="--s:16">Thursday, 10 December 2026</p>
+      <p class="where st" style="--s:17">Hotel Hyatt Place, Bahadarabad, Haridwar</p>
     </div>
   </section>
 
@@ -204,6 +221,6 @@
 </main>
 
 <canvas id="sparkle"></canvas>
-<script src="app.js?v=15"></script>
+<script src="app.js?v=16"></script>
 </body>
 </html>

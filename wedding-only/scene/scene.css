@@ -1,0 +1,10 @@
+/* A royal page shown on its own inside a frame on the main invitation */
+html,body{height:100%!important;min-height:0!important;margin:0;overflow:hidden;background:transparent!important}
+.viewer{height:100%!important;padding:0!important;background:none!important;display:block!important;position:relative}
+.card-area{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;aspect-ratio:auto!important}
+.card-stack{border-radius:0!important;box-shadow:none!important;transform:none!important}
+.navigation{display:none!important}
+.art-note{position:absolute;left:50%;bottom:2.4%;transform:translateX(-50%);z-index:40;margin:0!important;padding:7px 15px;border-radius:30px;
+  background:#2a160fdd;color:#ffe7ae!important;font:italic 600 13px/1.25 'Cormorant Garamond',Georgia,serif!important;white-space:nowrap;max-width:94%;
+  overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .45s;pointer-events:none;min-height:0!important}
+.art-note.responding{opacity:1}

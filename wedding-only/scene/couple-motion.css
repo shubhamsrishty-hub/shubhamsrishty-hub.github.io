@@ -1,0 +1,69 @@
+
+.dinner .card-art{background-image:url('./dinner-approach-plate.webp?v=2')}
+.groom-stage,.groom-figure,.groom-paint,.groom-fabric{position:absolute;inset:0;pointer-events:none}
+.groom-stage{z-index:2;transform-origin:50% 99.5%;will-change:transform}
+.groom-paint,.groom-fabric{background:url('./groom-rear.webp?v=2') center/100% 100% no-repeat}
+.groom-fabric{clip-path:polygon(45% 77%,59% 78%,62% 96%,53% 97%,47% 90%);transform-origin:48% 78%;animation:groomCoatBreeze 4.8s ease-in-out infinite alternate}
+.groom-figure{transform-origin:50% 98%;will-change:transform}
+.dinner.active .groom-stage{animation:groomForward 6.4s .25s cubic-bezier(.35,.1,.35,1) both}
+.dinner.active .groom-figure{animation:groomFootstep .8s .25s ease-in-out 8}
+.groom-approach-touch{position:absolute;left:36%;top:65%;width:28%;height:35%;z-index:6;border:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.groom-approach-touch:focus-visible{outline:1px solid #ffedb766;border-radius:40%}
+.reset-approach .groom-stage,.reset-approach .groom-figure{animation:none!important}
+@keyframes groomForward{from{transform:translateY(0) scale(1)}to{transform:translateY(-5.4cqh) scale(.84)}}
+@keyframes groomFootstep{0%,100%{transform:translateX(-.13cqw) rotate(-.22deg)}25%{transform:translateY(-.16cqh)}50%{transform:translateX(.13cqw) rotate(.22deg)}75%{transform:translateY(-.16cqh)}}
+@keyframes groomCoatBreeze{from{transform:skewX(-.3deg) rotate(-.35deg)}to{transform:skewX(.35deg) rotate(.4deg)}}
+.moving-venue .card-art,.moving-venue .bouquet-sway{background-image:url('./venue-couple-plate.webp?v=2')}
+.venue-couture,.couple-still,.attire{position:absolute;inset:0;pointer-events:none}
+.venue-couture{z-index:4}
+.couple-still,.attire{background:url('./venue-couple-sprite.webp?v=2') center/100% 100% no-repeat}
+.attire{will-change:transform}
+.bride-veil{clip-path:polygon(59% 62%,64% 65%,82% 77%,66% 86%,59% 77%);transform-origin:59% 64%;animation:veilBreeze 6s -.9s ease-in-out infinite}
+.bride-hem{clip-path:polygon(45% 82%,74% 82%,82% 95%,39% 95%);transform-origin:56% 82%;animation:lehengaBreeze 5.4s -1.5s ease-in-out infinite}
+.groom-stole{clip-path:polygon(33% 69%,43% 70%,41% 87%,29% 87%);transform-origin:39% 70%;animation:stoleBreeze 5.2s -2.1s ease-in-out infinite}
+@keyframes veilBreeze{0%,100%{transform:skewX(-.7deg) rotate(-.9deg) scaleX(.99)}50%{transform:skewX(1.2deg) rotate(1.2deg) scaleX(1.025)}}
+@keyframes lehengaBreeze{0%,100%{transform:skewX(-.35deg) scaleX(.997)}50%{transform:skewX(.45deg) scaleX(1.012)}}
+@keyframes stoleBreeze{0%,100%{transform:rotate(-.7deg) skewX(-.3deg)}50%{transform:rotate(.8deg) skewX(.5deg)}}
+.card:not(.active) .attire,.card:not(.active) .groom-fabric{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.groom-stage,.groom-figure,.groom-fabric,.attire{animation:none!important}}
+
+.couple-still{mask-size:100% 100%;mask-mode:luminance;mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%20preserveAspectRatio%3D%27none%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20fill%3D%27white%27%2F%3E%3Cpath%20d%3D%27M66%2069L81%2077%2066%2086%2064%2079%2067%2074ZM44%2085H78L82%2096H39ZM32%2074L38%2074%2037%2086%2031%2086Z%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E")}
+
+.groom-paint,.groom-fabric{background-size:54% 44%;background-position:50% 100%}
+.couple-still,.attire{background-size:62% 54.5%;background-position:58.5% 95%;background-repeat:no-repeat}
+.bride-veil{clip-path:polygon(64% 66%,68% 69%,82% 77%,66% 87%,63% 79%,66% 74%);transform-origin:64% 67%}
+.groom-figure:after{content:'';position:absolute;left:46%;top:98.2%;width:8%;height:.8%;border-radius:50%;background:#59371636;filter:blur(3px);z-index:-1}
+
+/* The approach is articulated: planted feet, alternating leg swing, then settle. */
+.dinner.active .groom-stage,.dinner.active .groom-figure{animation:none!important}
+.groom-stage{transform-origin:50% 99.4%}
+.groom-figure:after{display:none}
+.groom-leg{position:absolute;inset:0;background:url('./groom-rear.webp?v=2') 50% 100%/54% 44% no-repeat;pointer-events:none;z-index:1;will-change:transform}
+.groom-leg-left{clip-path:polygon(44% 90.5%,50.2% 90.5%,50.3% 100%,43% 100%);transform-origin:48.3% 92.4%}
+.groom-leg-right{clip-path:polygon(49.8% 90.5%,56% 90.5%,56% 100%,49.8% 100%);transform-origin:51.5% 92.4%}
+.groom-paint{clip-path:inset(0 0 6.4% 0);z-index:2;transform-origin:50% 92%}
+.groom-fabric{clip-path:polygon(45% 77%,59% 78%,62% 93.5%,53% 93.5%,47% 90%);z-index:3;transform-origin:49% 79%;animation:groomCoatBreeze 3.6s ease-in-out infinite alternate}
+.groom-ground-shadow{position:absolute;left:45.5%;top:99%;width:9%;height:.7%;background:radial-gradient(ellipse,#48301960,#67452e25 50%,transparent 72%);filter:blur(1px);z-index:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.groom-stage,.groom-leg,.groom-paint{transform:none!important}}
+
+/* Native timing keeps every footfall smooth on mobile and while the canvas is idle. */
+.dinner.active .groom-stage.is-walking{animation:groundedApproach 5.4s .18s linear both!important}
+.groom-stage.is-walking .groom-leg-left{animation:leftGroundedStep 1.8s .18s linear 3}
+.groom-stage.is-walking .groom-leg-right{animation:rightGroundedStep 1.8s .18s linear 3}
+.groom-stage.is-walking .groom-paint{animation:walkingWeight 1.8s .18s ease-in-out 3}
+@keyframes groundedApproach{from{transform:translateY(0) scale(1)}to{transform:translateY(-2.3cqh) scale(.975)}}
+@keyframes leftGroundedStep{0%{transform:translateY(0)}25%{transform:translateY(.15cqh)}50%{transform:translateY(.3cqh)}62.5%{transform:translate(-.08cqw,-.38cqh) rotate(-3deg)}75%{transform:translate(-.12cqw,-.67cqh) rotate(-5deg)}87.5%{transform:translate(-.06cqw,-.35cqh) rotate(-2deg)}100%{transform:translateY(0)}}
+@keyframes rightGroundedStep{0%{transform:translateY(.3cqh)}12.5%{transform:translate(.08cqw,-.38cqh) rotate(3deg)}25%{transform:translate(.12cqw,-.67cqh) rotate(5deg)}37.5%{transform:translate(.06cqw,-.35cqh) rotate(2deg)}50%{transform:translateY(0)}75%{transform:translateY(.15cqh)}100%{transform:translateY(.3cqh)}}
+@keyframes walkingWeight{0%,50%,100%{transform:translateX(-.08cqw) rotate(-.25deg)}12.5%,62.5%{transform:translateY(-.13cqh)}25%,75%{transform:translateX(.08cqw) rotate(.25deg)}37.5%,87.5%{transform:translateY(-.13cqh)}}
+@media(prefers-reduced-motion:reduce){.dinner.active .groom-stage.is-walking,.groom-stage.is-walking .groom-leg,.groom-stage.is-walking .groom-paint{animation:none!important}}
+
+/* Walking is now driven frame-by-frame in card.js (perspective path + planted footfalls). */
+.dinner.active .groom-stage.is-walking,.groom-stage .groom-leg,.groom-stage .groom-paint{animation:none!important}
+.groom-stage{transform-origin:50% 99.2%;transition:none}
+.groom-figure{transform-origin:50% 99.2%}
+.groom-leg-left{transform-origin:48.3% 93.6%}
+.groom-leg-right{transform-origin:51.5% 93.6%}
+.groom-paint{transform:none}
+.dinner .card-art::after{content:'';position:absolute;left:36%;top:40%;width:28%;height:14%;border-radius:50%;background:radial-gradient(ellipse,#ffd98a55,#ffb84d22 45%,transparent 70%);opacity:0;pointer-events:none;mix-blend-mode:plus-lighter;transition:opacity 1.6s ease}
+.dinner.groom-arrived .card-art::after{opacity:1;animation:brideGlow 3.2s 1.6s ease-in-out infinite}
+@keyframes brideGlow{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}

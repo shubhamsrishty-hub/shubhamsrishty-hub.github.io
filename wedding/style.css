@@ -1,0 +1,411 @@
+:root{--blue:#1e2e9e;--blue-d:#14206e;--gold:#f0c27a;--gold-l:#fde3ae;--peach:#f6b48a;--ivory:#fff8ec;--line:#a9b7ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#0e1650}
+body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--ivory);background:#0e1650;-webkit-tap-highlight-color:transparent;font-variant-numeric:lining-nums}
+body.locked{overflow:hidden;height:100svh}
+.invite{max-width:480px;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 60px #0009;
+  background:linear-gradient(#2436b4b8,#1f2fa3c4),url('texture.jpg') 0 0/220px 220px,var(--blue)}
+body.has-paper .invite{background:url('paper.jpg?v=1') 0 0/100% auto repeat-y,#1f36a6}
+
+/* ---------- type ---------- */
+.script{font-family:'Great Vibes',cursive;font-weight:400;color:var(--ivory);line-height:1.08}
+.sc{font-family:'Cormorant SC','Cormorant Garamond',serif;font-weight:600;letter-spacing:.16em;font-size:15px;color:var(--ivory)}
+.sc.tiny{font-size:12px;letter-spacing:.24em}
+.lead{font-style:italic;font-size:19px;line-height:1.4;color:#eef0ff}
+.lead.small{font-size:16px}
+.hindi{font-family:'Tiro Devanagari Hindi',serif;font-size:18px;color:var(--gold-l)}
+.title{font-size:52px;text-align:center;text-shadow:0 2px 10px #0004}
+
+/* ornament divider: image when provided, gold line otherwise */
+.orn{width:200px;height:34px;margin:6px auto 14px;position:relative}
+.orn::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+.orn::after{content:'';position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-5px 0 0 -5px;transform:rotate(45deg);border:1px solid var(--gold);background:var(--blue)}
+body.has-orn .orn{background:url('ornament.png?v=1') center/contain no-repeat}
+body.has-orn .orn::before,body.has-orn .orn::after{display:none}
+
+/* ---------- top bar ---------- */
+.topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;pointer-events:none;opacity:0;transition:opacity .6s}
+.topbar.show{opacity:1}
+.topbar.show>*{pointer-events:auto}
+.pill{display:flex;align-items:center;gap:7px;font:600 14px/1 -apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;background:#3a2236d9;border:1px solid #ffffff22;border-radius:30px;padding:10px 16px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.pill span{font-size:16px}
+.music{width:40px;height:40px;border-radius:50%;border:1px solid #ffffff33;background:#3a2236d9;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.music .note{font:19px Georgia}
+.music .bars{display:none;gap:2px;align-items:flex-end;height:15px}
+.music .bars i{width:3px;background:#fff;border-radius:2px;animation:mbar .9s ease-in-out infinite}
+.music .bars i:nth-child(2){animation-delay:-.3s}.music .bars i:nth-child(3){animation-delay:-.6s}
+.music.playing .note{display:none}.music.playing .bars{display:flex}
+@keyframes mbar{0%,100%{height:4px}50%{height:15px}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;text-align:center;background:#0b1640;cursor:pointer}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v-loop{opacity:0;transition:opacity .6s ease}
+.lit .v-loop{opacity:1}
+.hero-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#060c2ab3 0%,#060c2a40 24%,transparent 42%,transparent 80%,#060c2a99 100%)}
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,#1f36a6);pointer-events:none;opacity:0;transition:opacity 1s}
+.welcomed::after{opacity:1}
+.hero-text{position:absolute;left:0;right:0;top:9%;padding:0 20px;transition:opacity 1.2s ease,transform 1.2s ease;text-shadow:0 2px 12px #000b}
+.hero-text .big{font-size:56px;margin-bottom:4px}
+.hero-text.after{opacity:0;transform:translateY(14px);pointer-events:none;top:7.5%}
+.hero-text.after .names{font-size:56px}
+.hero-text.after .amp{font-size:30px;margin:-6px 0}
+.hero-text.after .orn{margin:8px auto 6px}
+.welcomed .hero-text.before{opacity:0;transform:translateY(-10px)}
+.welcomed .hero-text.after{opacity:1;transform:none}
+.tap-hint{position:absolute;left:0;right:0;bottom:8%;font:italic 600 20px 'Cormorant Garamond',serif;color:var(--ivory);text-shadow:0 0 14px #ffcf7a,0 2px 8px #000;animation:glow 2.2s ease-in-out infinite;transition:opacity .5s}
+.lighting .tap-hint{opacity:0;animation:none}
+@keyframes glow{50%{opacity:.55;text-shadow:0 0 4px #ffcf7a,0 2px 8px #000}}
+.scroll-hint{position:absolute;left:50%;bottom:6%;z-index:2;transform:translateX(-50%);font-family:'Great Vibes',cursive;font-size:24px;color:var(--ivory);text-decoration:none;opacity:0;transition:opacity 1s;text-shadow:0 2px 10px #000}
+.scroll-hint span{display:block;width:10px;height:10px;margin:2px auto 0;border-right:1.5px solid var(--ivory);border-bottom:1.5px solid var(--ivory);transform:rotate(45deg);animation:bob 1.6s ease-in-out infinite}
+.scroll-hint{pointer-events:none}
+.welcomed .scroll-hint{opacity:1;pointer-events:auto}
+@keyframes bob{50%{transform:translateY(6px) rotate(45deg)}}
+
+/* ---------- sections ---------- */
+.sec{padding:54px 22px 50px;text-align:center;position:relative}
+
+/* date */
+.hint{font-style:italic;font-size:18px;margin-bottom:18px}
+.scratch-row{display:flex;justify-content:center;gap:14px}
+.sc-wrap span{display:block;margin-top:10px;font:600 12px 'Cormorant SC',serif;letter-spacing:.3em;text-transform:uppercase;color:#dfe4ff}
+.scratch{position:relative;width:98px;height:104px;border-radius:12px;overflow:hidden;box-shadow:0 8px 22px #0006}
+.under{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#3a4fd0,#2235b0);border:1px solid #8fa0ff66;border-radius:12px}
+.under b{font:500 36px/1 'Cormorant Garamond',serif;color:var(--ivory)}
+.under b.word{font:italic 500 22px/1 'Cormorant Garamond',serif}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .7s}
+.scratch.done canvas{opacity:0;pointer-events:none}
+.day-line{margin-top:20px;font-style:italic;font-size:19px;opacity:0;transition:opacity 1s}
+.all-done .day-line{opacity:1}
+
+/* blessing arch */
+.blessing{padding-top:40px}
+.arch{position:relative;width:86%;max-width:360px;margin:0 auto 22px;aspect-ratio:300/440}
+.arch-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.arch-line path{fill:none;stroke:var(--line);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.arch-line path.in{stroke:#dfe5ff;stroke-width:1}
+.arch-line ellipse{fill:none;stroke:#dfe5ff;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.reveal .arch-line path{stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 2.6s ease}
+.reveal.in .arch-line path{stroke-dashoffset:0}
+.deity{position:absolute;left:12%;right:12%;top:27%;width:76%;border-radius:6px;box-shadow:0 12px 30px #0008;opacity:0;transform:scale(.94);transition:opacity 1.2s .9s,transform 1.2s .9s}
+.reveal.in .deity{opacity:1;transform:none}
+.seal{display:block;width:150px;height:150px;margin:0 auto}
+.seal .ring{fill:none;stroke:#eef0ff;stroke-width:1.2}
+.seal .ring.thin{stroke-width:.8;stroke:#eef0ffaa}
+.seal .arc{font:600 10.5px 'Cormorant SC',serif;letter-spacing:2.4px;fill:#eef0ff}
+.seal .dot{fill:#eef0ff}
+.seal .mono{font:500 52px 'Cormorant Garamond',serif;fill:#fff;text-anchor:middle}
+
+/* invitation card */
+.card-sec{padding-top:10px}
+.card{position:relative;padding:38px 22px 34px;border:6px solid #3d55e0;outline:1px solid #dfe5ff;outline-offset:-14px;box-shadow:inset 0 0 0 1px #8fa0ff55}
+.card .who{font-size:44px;margin:14px 0 8px;text-shadow:0 2px 8px #0003}
+.card .lbl{font-size:13px;letter-spacing:.28em;color:#dfe4ff;margin-top:2px}
+.card .parents{font-size:16px;letter-spacing:.12em;line-height:1.55;margin-top:4px}
+.card .with{font-size:34px;margin:12px 0 2px}
+.when{font:600 18px 'Cormorant Garamond',serif;margin-top:26px}
+.where{font-style:italic;font-size:18px;margin-top:2px}
+
+/* timeline */
+.tl{list-style:none;position:relative;margin-top:16px}
+.tl::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:#dfe5ffaa}
+.ev{display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;padding:20px 0}
+.ev .dia{grid-column:2;grid-row:1;width:11px;height:11px;margin:auto;transform:rotate(45deg);border:1px solid #fff;background:var(--blue);position:relative;z-index:1}
+.ev.right .pic{grid-column:1;grid-row:1}.ev.right .txt{grid-column:3;grid-row:1;text-align:left;padding-left:8px}
+.ev.left .pic{grid-column:3;grid-row:1}.ev.left .txt{grid-column:1;grid-row:1;text-align:right;padding-right:8px}
+.pic img{width:100%;max-width:170px;display:block;margin:auto;filter:drop-shadow(0 6px 10px #0005)}
+.txt .d{font-size:12px;letter-spacing:.24em}
+.txt .t{font-size:40px;color:var(--peach);margin:2px 0}
+.txt h3{font:700 22px/1.1 'Cormorant Garamond',serif}
+.txt .hi{font-family:'Tiro Devanagari Hindi',serif;font-size:16px;font-weight:700}
+.txt .v{font-style:italic;font-size:16px;line-height:1.35;margin-top:6px;color:#e8ebff}
+.cal{margin-top:10px;font:italic 600 16px 'Cormorant Garamond',serif;color:var(--ivory);background:none;border:0;border-bottom:1px solid var(--ivory);padding:0 0 1px;cursor:pointer}
+.reveal.ev{transform:translateY(26px)}
+.reveal.ev .pic{opacity:0;transform:scale(.9);transition:opacity 1s .25s,transform 1s .25s}
+.reveal.ev.in .pic{opacity:1;transform:none}
+
+/* location */
+.vname{font:700 22px 'Cormorant Garamond',serif}
+.vaddr{font-style:italic;font-size:17px;margin:2px 0 16px}
+.map{border:4px solid #3d55e0;outline:1px solid #dfe5ff;outline-offset:3px;border-radius:4px;overflow:hidden;height:230px;background:#2235b0}
+.map iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.9)}
+.link{display:inline-block;margin-top:16px;font:italic 600 18px 'Cormorant Garamond',serif;color:var(--ivory);border-bottom:1px solid var(--ivory);text-decoration:none}
+
+/* closing */
+.closing{position:relative;min-height:760px;display:flex;align-items:flex-start;justify-content:center;text-align:center;overflow:hidden}
+.closing-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.closing::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(#1f36a6 0%,#1f36a6aa 10%,#0b164022 40%,transparent 70%,#060c2a88 100%)}
+.closing-text{position:relative;z-index:2;padding:64px 22px 0;text-shadow:0 2px 12px #000a}
+.closing .names{font-size:52px;margin:14px 0 6px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
+.reveal.in{opacity:1;transform:none}
+
+#sparkle{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:25}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.tap-hint,.scroll-hint span{animation:none}}
+@media (max-width:370px){.title{font-size:44px}.card .who{font-size:38px}.scratch{width:88px;height:96px}.txt .t{font-size:34px}.cd b{font-size:38px;min-width:52px}}
+
+/* location: illustrated map (shown once venue-map.jpg is added) + gold button */
+.venue-art{display:none;position:relative;width:92%;margin:4px auto 0;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px #f0c27a88,0 0 0 7px #1f36a6,0 0 0 8px #f0c27a55,0 14px 34px #0008}
+.venue-art.has{display:block}
+.venue-art img{display:block;width:100%;animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.05)}}
+.venue-art img{transform-origin:76% 58%}
+.venue-art .pin{position:absolute;left:var(--px,50%);top:var(--py,50%);width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#ffd36a;box-shadow:0 0 0 0 #ffd36aaa;animation:ping 2s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 #ffd36acc}100%{box-shadow:0 0 0 26px #ffd36a00}}
+.go{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:14px 26px;border-radius:40px;text-decoration:none;font:600 15px 'Cormorant SC',serif;letter-spacing:.18em;color:#2a1405;background:linear-gradient(#ffeab0,#d9a548);box-shadow:0 0 0 1px #fff3cf66 inset,0 8px 24px #0007;animation:gpulse 2.4s ease-in-out infinite}
+.go .pin-ic{width:12px;height:12px;border-radius:50% 50% 50% 0;background:#7a2a0c;transform:rotate(-45deg);box-shadow:inset 0 0 0 3px #f6d58a}
+@keyframes gpulse{50%{box-shadow:0 0 0 1px #fff3cf66 inset,0 8px 24px #0007,0 0 0 10px #f0c27a00,0 0 22px #f0c27a88}}
+
+/* handwritten word-by-word reveal: a soft ink wipe, no blur or movement */
+.hero-text.after .w{display:inline-block;opacity:0;-webkit-mask-image:linear-gradient(90deg,#000 42%,transparent 58%);mask-image:linear-gradient(90deg,#000 42%,transparent 58%);-webkit-mask-size:240% 100%;mask-size:240% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.welcomed .hero-text.after .w{animation:ink .75s ease-out forwards;animation-delay:var(--d)}
+.hero-text.after .w{padding:.25em .45em;margin:-.25em -.45em}
+.hero-text.after .script .w{padding:.35em .6em .45em;margin:-.35em -.6em -.45em}
+@keyframes ink{0%{opacity:1;-webkit-mask-position:100% 0;mask-position:100% 0}100%{opacity:1;-webkit-mask-position:0 0;mask-position:0 0}}
+.hero-text.after .orn{opacity:0;transform:scaleX(.2)}
+.welcomed .hero-text.after .orn{animation:ornIn .7s ease forwards;animation-delay:var(--d)}
+@keyframes ornIn{to{opacity:1;transform:none}}
+.hero-text.after{transition:opacity .01s}
+.welcomed .hero-text.before{transition:opacity .35s ease}
+/* arched deity painting */
+.arch .art-img{opacity:0;transition:opacity 1.4s .8s}
+.arch.in .art-img{opacity:1}
+.arch-line .gold{fill:none;stroke:#f0c27a;stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-dasharray:none;stroke-dashoffset:0;opacity:0;transition:opacity 1.2s 1.2s}
+.arch.in .arch-line .gold{opacity:1}
+
+/* ---------- palace doors (date reveal) ---------- */
+.doors{display:flex;justify-content:center;gap:14px;perspective:700px}
+.dw>span{display:block;margin-top:10px;font:600 12px 'Cormorant SC',serif;letter-spacing:.3em;text-transform:uppercase;color:#dfe4ff}
+.portal{position:relative;width:98px;height:132px;padding:0;border:0;cursor:pointer;background:radial-gradient(ellipse at 50% 52%,#fffaf0 0%,#fbe6b4 38%,#e9b968 72%,#a8681f 100%);
+  border-radius:49px 49px 6px 6px;box-shadow:0 0 0 2px #f0c27a,0 0 0 5px #1f36a6,0 0 0 6px #f0c27a88,0 10px 26px #0007;overflow:hidden;transform-style:preserve-3d;-webkit-tap-highlight-color:transparent}
+.portal::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 18px #ffe8a8;opacity:0;transition:opacity 1s .5s;pointer-events:none}
+.portal .val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-top:10px;opacity:0;transform:scale(.7);transition:opacity .7s .35s,transform .9s .35s cubic-bezier(.2,1.4,.4,1);
+  color:#5a1712;text-shadow:0 1px 0 #fff6d8,0 0 18px #fff3c8}
+.portal .num{font:700 34px 'Cinzel',serif;letter-spacing:.02em}
+.portal .word{font:400 26px 'Great Vibes',cursive;letter-spacing:-.01em}
+.leaf{position:absolute;top:0;bottom:0;width:50%;z-index:2;transition:transform 1.1s cubic-bezier(.6,.05,.3,1);backface-visibility:hidden;
+  background:linear-gradient(160deg,#f9e2a4,#d9a548 45%,#b9832e 70%,#e9c477);box-shadow:inset 0 0 0 4px #b9832e55}
+.leaf::before{content:'';position:absolute;inset:12px 9px 14px;border:1px solid #7a5216aa;border-radius:30px 30px 3px 3px;background:radial-gradient(circle at 50% 38%,#fff3cf66 0 8px,transparent 9px),repeating-linear-gradient(0deg,transparent 0 12px,#7a52161c 12px 13px)}
+.leaf::after{content:'';position:absolute;top:58%;width:7px;height:7px;border-radius:50%;background:#7a5216;box-shadow:0 0 0 2px #f9e2a4}
+.leaf.l{left:0;transform-origin:left center;border-radius:49px 0 0 6px}
+.leaf.r{right:0;transform-origin:right center;border-radius:0 49px 6px 0}
+.leaf.l::before{border-radius:30px 4px 3px 3px}.leaf.r::before{border-radius:4px 30px 3px 3px}
+.leaf.l::after{right:6px}.leaf.r::after{left:6px}
+.portal:not(.open){animation:knock 2.6s ease-in-out infinite}
+.dw:nth-child(2) .portal:not(.open){animation-delay:.4s}.dw:nth-child(3) .portal:not(.open){animation-delay:.8s}
+@keyframes knock{0%,80%,100%{transform:none}86%{transform:rotate(-1.5deg)}92%{transform:rotate(1.5deg)}}
+.portal.open .leaf.l{transform:rotateY(-108deg)}
+.portal.open .leaf.r{transform:rotateY(108deg)}
+.portal.open .val{opacity:1;transform:none}
+.portal.open::after{opacity:1}
+@media (max-width:370px){.portal{width:88px;height:120px}.portal .num{font-size:30px}.portal .word{font-size:23px}}
+
+/* ---------- countdown windows ---------- */
+.cd{display:flex;justify-content:center;gap:12px;margin-top:10px;perspective:600px}
+.win>span{display:block;margin-top:9px;font:600 12px 'Cormorant SC',serif;letter-spacing:.24em;text-transform:uppercase;color:#dfe4ff}
+.glass{position:relative;width:70px;height:92px;border-radius:35px 35px 6px 6px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-top:10px;
+  background:radial-gradient(ellipse at 50% 55%,#fffaf0 0%,#fbe6b4 40%,#e9b968 75%,#a8681f 100%);
+  box-shadow:0 0 0 2px #f0c27a,0 0 0 5px #1f36a6,0 0 0 6px #f0c27a88,0 10px 22px #0007,inset 0 0 16px #ffe8a8}
+.glass::before{content:'';position:absolute;left:50%;top:6px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#b9832e}
+.glass b{display:block;font:700 30px/1 'Cinzel',serif;color:#5a1712;text-shadow:0 1px 0 #fff6d8,0 0 14px #fff3c8}
+.glass b.tick{animation:tick .55s cubic-bezier(.2,1.2,.4,1)}
+@keyframes tick{0%{transform:translateY(-60%) rotateX(70deg);opacity:0}100%{transform:none;opacity:1}}
+.win:last-child .glass{animation:breathe 1s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 2px #f0c27a,0 0 0 5px #1f36a6,0 0 0 6px #f0c27a88,0 10px 22px #0007,inset 0 0 24px #fff1c4,0 0 26px #f0c27a66}}
+.until{font-style:italic;font-size:18px;margin-top:16px}
+
+@media (max-width:370px){.glass{width:62px;height:84px}.glass b{font-size:26px}.cd{gap:9px}}
+
+/* ---------- golden mandala medallion ---------- */
+.medallion{position:relative;width:250px;height:250px;margin:6px auto 0}
+.medallion svg{position:relative;width:100%;height:100%;overflow:visible}
+.m-glow{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,#ffd98a66,#ffd98a00 70%);animation:mglow 3.4s ease-in-out infinite}
+@keyframes mglow{50%{transform:scale(1.25);opacity:.6}}
+.medallion .ln{fill:none;stroke:url(#gold);stroke-width:1.4;stroke-dasharray:710;stroke-dashoffset:710;transition:stroke-dashoffset 2s ease}
+.medallion .ln.thin{stroke-width:1;stroke-dasharray:360;stroke-dashoffset:360;transition-delay:.4s}
+.medallion.in .ln{stroke-dashoffset:0}
+.medallion .pt{fill:none;stroke:url(#gold);stroke-width:1.2;opacity:0;transform-box:view-box}
+.medallion.in .pt{animation:petal .8s ease forwards;animation-delay:calc(.6s + var(--i)*.07s)}
+@keyframes petal{from{opacity:0;stroke-dasharray:0 140}to{opacity:1;stroke-dasharray:140 0}}
+.medallion .petals{transform-origin:150px 150px;animation:spin 60s linear infinite}
+.medallion .bd{fill:#f6d58a;opacity:0}
+.medallion.in .bd{animation:bead .4s ease forwards,twinkle 2.4s ease-in-out infinite;animation-delay:calc(1.6s + var(--i)*.04s),calc(2.8s + var(--i)*.15s)}
+@keyframes bead{to{opacity:1}}
+@keyframes twinkle{50%{opacity:.25}}
+.medallion .spin-rev{transform-origin:150px 150px;animation:spin 90s linear infinite reverse}
+.medallion .spin-slow{transform-origin:150px 150px;animation:spin 70s linear infinite;opacity:0;transition:opacity 1.2s 1.8s}
+.medallion.in .spin-slow{opacity:1}
+.ring-txt{font:600 11.5px 'Cormorant SC',serif;letter-spacing:3.4px;fill:#fbe7b5}
+@keyframes spin{to{transform:rotate(360deg)}}
+.medallion .core{fill:#1a2a8c;stroke:#f0c27a55;stroke-width:1;opacity:.85}
+.medallion .mono{text-anchor:middle;font-family:'Great Vibes',cursive;fill:url(#gold2);opacity:0;transform-origin:150px 150px;transform:scale(.6)}
+.medallion .mono .s1,.medallion .mono .s2{font-size:56px}
+.medallion .mono .amp{font-size:26px}
+.medallion.in .mono{animation:monoIn 1.2s 1.2s cubic-bezier(.2,1.3,.4,1) forwards}
+@keyframes monoIn{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.medallion *{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}}
+.medallion .pt2{fill:#f0c27a2e;stroke:#f6d58aaa;stroke-width:.8;opacity:0}
+.medallion.in .pt2{animation:bead .6s ease forwards;animation-delay:calc(1.4s + var(--i)*.05s)}
+.medallion .tip{fill:#fbe7b5;opacity:0}
+.medallion.in .tip{animation:bead .4s 2s ease forwards}
+.ring-txt{font-size:11px;letter-spacing:1px}
+
+/* ---------- diyas floating on the Ganga ---------- */
+.ganga{position:relative;height:250px;margin:30px -22px 0;overflow:hidden}
+.ganga::before{content:'';position:absolute;left:0;right:0;top:148px;bottom:0;background:linear-gradient(#2a47c400,#1b2f9a99 35%,#1b2f9a88 70%,#1b2f9a00);pointer-events:none}
+.water{position:absolute;left:0;right:0;top:150px;height:80px;width:100%}
+.wv path{fill:none;stroke-linecap:round}
+.w1 path{stroke:#f0c27a99;stroke-width:1.1}
+.w2 path{stroke:#dfe5ff55;stroke-width:1}
+.w3 path{stroke:#f0c27a55;stroke-width:.9}
+.wv{animation:flow 9s linear infinite}
+.w2{animation-duration:13s;animation-direction:reverse}
+.w3{animation-duration:17s}
+@keyframes flow{to{transform:translateX(-400px)}}
+.float{position:absolute;top:20px;width:33%;text-align:center;opacity:0;transform:translateX(-40px)}
+.f1{left:0}.f2{left:33.5%}.f3{left:67%}
+.ganga.in .float{animation:sail 1.6s cubic-bezier(.2,.8,.3,1) forwards}
+.ganga.in .f2{animation-delay:.45s}.ganga.in .f3{animation-delay:.9s}
+@keyframes sail{to{opacity:1;transform:none}}
+.ename{font:400 25px/1.05 'Great Vibes',cursive;color:#fde3ae;text-shadow:0 2px 8px #0005;min-height:52px;display:flex;align-items:flex-end;justify-content:center}
+.edate{font:600 11px 'Cormorant SC',serif;letter-spacing:.28em;text-transform:uppercase;color:#dfe4ff;margin:4px 0 6px}
+.boat{position:relative;width:62px;height:96px;margin:0 auto;animation:boatBob 3.2s ease-in-out infinite}
+.f2 .boat{animation-delay:-1.1s}.f3 .boat{animation-delay:-2.1s}
+@keyframes boatBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(5px) rotate(2deg)}}
+.boat img{position:absolute;left:0;top:0;width:62px;filter:drop-shadow(0 0 10px #ffcf6a88)}
+.boat img:first-child{animation:glowf 2.2s ease-in-out infinite}
+@keyframes glowf{50%{filter:drop-shadow(0 0 18px #ffcf6acc) brightness(1.08)}}
+.boat .refl{top:66px;transform:scaleY(-.55);transform-origin:top;opacity:.3;filter:blur(2px);-webkit-mask-image:linear-gradient(#000,transparent 80%);mask-image:linear-gradient(#000,transparent 80%)}
+.rip{position:absolute;left:50%;top:70px;width:70px;height:12px;margin-left:-35px;border:1px solid #fde3ae88;border-radius:50%;opacity:0;animation:ripple 3.2s ease-out infinite}
+.rip.r2{animation-delay:1.6s}
+@keyframes ripple{0%{transform:scale(.4);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+.petals-drift i{position:absolute;top:168px;width:9px;height:6px;border-radius:60% 40% 60% 40%;background:#ff9f1c;opacity:.85;animation:petalDrift 14s linear infinite}
+.petals-drift i:nth-child(2n){background:#ffd23f;top:190px;animation-duration:18s}
+.petals-drift i:nth-child(3n){background:#e63946;top:206px;animation-duration:22s}
+.petals-drift i:nth-child(1){animation-delay:-2s}.petals-drift i:nth-child(2){animation-delay:-7s}.petals-drift i:nth-child(3){animation-delay:-11s}
+.petals-drift i:nth-child(4){animation-delay:-4s}.petals-drift i:nth-child(5){animation-delay:-15s}.petals-drift i:nth-child(6){animation-delay:-9s}
+@keyframes petalDrift{from{left:-5%;transform:rotate(0)}to{left:105%;transform:rotate(540deg)}}
+@media (max-width:370px){.ename{font-size:21px}}
+
+/* every number on the invite uses full-height digits (the font shorthand resets this, hence !important) */
+*{font-variant-numeric:lining-nums!important}
+
+/* ================= Shiva–Parvati arch: divine light, petals, lamps ================= */
+.arch{isolation:isolate}
+.arch .arch-line{position:relative;z-index:1}
+.rays{position:absolute;left:50%;top:54%;width:150%;aspect-ratio:1;z-index:0;border-radius:50%;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,#ffe2a030 0 2.4deg,transparent 2.4deg 12deg);
+  -webkit-mask-image:radial-gradient(circle,#000 22%,transparent 66%);mask-image:radial-gradient(circle,#000 22%,transparent 66%);
+  transform:translate(-50%,-50%);opacity:0;transition:opacity 2.4s 1s;animation:raySpin 110s linear infinite}
+.arch.in .rays{opacity:1}
+@keyframes raySpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.aura{position:absolute;left:50%;top:56%;width:104%;aspect-ratio:1;z-index:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#ffd98a66 0%,#ffd98a2e 38%,transparent 68%);
+  transform:translate(-50%,-50%);opacity:0;transition:opacity 2s .8s;animation:auraBreath 5.5s ease-in-out infinite}
+.arch.in .aura{opacity:1}
+@keyframes auraBreath{0%,100%{transform:translate(-50%,-50%) scale(.94)}50%{transform:translate(-50%,-50%) scale(1.08)}}
+.arch-fx{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.arch-fx .beam{fill:none;stroke:#fff3cf;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:6 94;stroke-dashoffset:100;opacity:0;filter:drop-shadow(0 0 4px #ffd98a)}
+.arch.in .arch-fx .beam{opacity:1;transition:opacity 1s 2.8s;animation:archBeam 6.5s linear 2.8s infinite}
+@keyframes archBeam{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.arch .sheen{opacity:0}
+.arch.in .sheen{opacity:1;animation:sheenMove 8s ease-in-out 3s infinite}
+@keyframes sheenMove{0%{transform:translateX(0) skewX(-16deg)}32%,100%{transform:translateX(540px) skewX(-16deg)}}
+.petal-fall{position:absolute;inset:-3% -7% 0;z-index:2;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1.6s 1.8s}
+.arch.in .petal-fall{opacity:1}
+.petal-fall i{position:absolute;top:-16px;left:var(--x);width:var(--z);height:calc(var(--z)*.68);border-radius:70% 30% 70% 30%;
+  background:radial-gradient(circle at 30% 30%,#ffffff88,transparent 60%),var(--c);opacity:0;animation:petalFall var(--t) linear infinite;animation-delay:var(--dl)}
+@keyframes petalFall{0%{transform:translate(0,0) rotate(0);opacity:0}8%{opacity:.95}50%{transform:translate(var(--sw),250px) rotate(200deg)}92%{opacity:.9}100%{transform:translate(calc(var(--sw)*-.6),520px) rotate(430deg);opacity:0}}
+.lamp{position:absolute;bottom:-12px;width:40px;z-index:3;opacity:0;transition:opacity 1.2s 2.2s;pointer-events:none}
+.lamp.l{left:-5px}.lamp.r{right:-5px}
+.arch.in .lamp{opacity:1;animation:lampGlow 2.3s ease-in-out infinite}
+.arch.in .lamp.r{animation-delay:-1.1s}
+@keyframes lampGlow{0%,100%{filter:drop-shadow(0 0 6px #ffcf6a99)}50%{filter:drop-shadow(0 0 16px #ffcf6aee) brightness(1.1)}}
+.mantra{animation:mantraGlow 4.6s ease-in-out infinite}
+@keyframes mantraGlow{0%,100%{text-shadow:0 0 0 #ffd98a00}50%{text-shadow:0 0 14px #ffd98acc,0 0 30px #ffd98a55}}
+
+/* ================= invitation card: drawn frame, crest, written names ================= */
+.card{border:0;outline:0;box-shadow:none;padding:50px 22px 40px}
+.card>p,.card>.with-row{position:relative;z-index:1}
+.frame{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.frame .ln{fill:none;stroke-dasharray:var(--L,2400);stroke-dashoffset:var(--L,2400);transition:stroke-dashoffset 2.6s cubic-bezier(.5,.1,.3,1)}
+.frame .f-out{stroke:#e9c57c;stroke-width:1.8}
+.frame .f-in{stroke:#dfe5ffaa;stroke-width:1;transition-delay:.35s}
+.awake>.frame .ln{stroke-dashoffset:0}
+.frame .f-cn{fill:#f3d089;opacity:0;transition:opacity .8s 2.2s}
+.awake>.frame .f-cn{opacity:1}
+.frame .f-beam{fill:none;stroke:#fff6d8;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:4 96;stroke-dashoffset:100;opacity:0;filter:drop-shadow(0 0 5px #ffd98a)}
+.awake>.frame .f-beam{opacity:1;animation:frameBeam 8s linear 2.8s infinite;transition:opacity 1s 2.8s}
+@keyframes frameBeam{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.crest{position:absolute;left:50%;top:-13px;width:170px;height:32px;margin-left:-85px;z-index:2;background:url('ornament.png?v=1') center/contain no-repeat;opacity:0;transform:scale(.55);transition:opacity .9s .2s,transform 1s .2s cubic-bezier(.2,1.3,.4,1)}
+.card.awake .crest{opacity:1;transform:none}
+.crest::before{content:'';position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-31px 0 0 -27px;border-radius:50%;background:radial-gradient(circle,#ffd98a99,transparent 68%);animation:crestGlow 2.6s ease-in-out infinite}
+@keyframes crestGlow{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.25);opacity:1}}
+.motes{position:absolute;inset:14px;overflow:hidden;pointer-events:none;z-index:0;opacity:0;transition:opacity 2s 1.5s}
+.card.awake .motes{opacity:1}
+.motes i{position:absolute;bottom:-8px;left:var(--x);width:var(--z);height:var(--z);border-radius:50%;background:#ffe6ab;box-shadow:0 0 6px 1px #ffd27a99;opacity:0;animation:moteRise var(--t) linear infinite;animation-delay:var(--dl)}
+@keyframes moteRise{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}50%{transform:translate(var(--sw),-330px);opacity:.5}80%{opacity:.8}100%{transform:translate(calc(var(--sw)*-1),-680px);opacity:0}}
+.card .st{opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s ease;transition-delay:calc(.5s + var(--s)*.2s)}
+.card.awake .st{opacity:1;transform:none}
+.card .who{text-shadow:none;filter:drop-shadow(0 2px 6px #0000004d)}
+.card .write .w{display:inline-block;opacity:0;padding:.35em .6em .45em;margin:-.35em -.6em -.45em;
+  -webkit-mask-image:linear-gradient(90deg,#000 42%,transparent 58%);mask-image:linear-gradient(90deg,#000 42%,transparent 58%);-webkit-mask-size:240% 100%;mask-size:240% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .card .write .w{background:linear-gradient(100deg,#fff8ec 0%,#fff8ec 40%,#ffd98a 50%,#fff8ec 60%,#fff8ec 100%) 100% 0/280% 100% no-repeat;
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+.card.awake .write .w{animation:ink .85s ease-out var(--d) forwards,nameShine 6.5s ease-in-out calc(var(--d) + 2.4s) infinite}
+@keyframes nameShine{0%,62%{background-position:100% 0}100%{background-position:0 0}}
+.with-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 2px}
+.with-row .with{margin:0}
+.with-row i{display:block;height:1px;width:0;background:linear-gradient(90deg,transparent,#e9c57c);transition:width 1.3s ease calc(.9s + var(--s)*.2s)}
+.with-row i:last-child{background:linear-gradient(270deg,transparent,#e9c57c)}
+.card.awake .with-row i{width:58px}
+@media (prefers-reduced-motion:reduce){
+  .card .st,.card .write .w,.crest,.frame .f-cn{opacity:1!important;transform:none!important;animation:none!important;-webkit-mask-image:none!important;mask-image:none!important}
+  .frame .ln{stroke-dashoffset:0!important}.rays,.aura,.arch-fx,.petal-fall,.f-beam,.motes{display:none!important}
+  .mantra,.lamp{animation:none!important}
+}
+
+/* ================= royal living paintings ================= */
+.royal-sec{padding-left:8px;padding-right:8px}
+.scene{position:relative;padding:9px;margin:18px auto 0;max-width:460px}
+.scene-box{position:relative;aspect-ratio:476/845;border-radius:5px;overflow:hidden;background:#16247a center/cover no-repeat;box-shadow:0 14px 36px #0009;isolation:isolate}
+.scene-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;opacity:0;transition:opacity .7s ease;background:transparent;pointer-events:none}
+.scene-box{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.scene.ready .scene-box iframe{opacity:1}
+.scene-hint{font-style:italic;font-size:16px;line-height:1.3;color:#e8ebff;margin:12px 10px 34px}
+.scene-hint:last-child{margin-bottom:6px}
+.hint.step{margin:34px 0 0}
+.location .scene-hint{margin-bottom:26px}
+.topbar .pill{transition:opacity .35s ease,transform .35s ease}
+.topbar.tucked .pill{opacity:0;transform:translateY(-160%);pointer-events:none}
+/* palace doors over the first royal painting */
+.gate{position:absolute;inset:0;z-index:5;display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;perspective:1500px;-webkit-tap-highlight-color:transparent}
+.gate i{position:absolute;top:0;bottom:0;width:50.2%;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  transition:transform 2.3s cubic-bezier(.62,.04,.3,1),filter 2.3s ease;will-change:transform}
+.gate i b{position:absolute;inset:0;background:url('palace-doors.webp') 13.42% 0/236.7% 100% no-repeat}
+.gate .gl{left:0;transform-origin:left center}
+.gate .gl b{transform-origin:left center}
+.gate .gr{right:0;transform-origin:right center}
+.gate .gr b{background-position:86.58% 0;transform-origin:right center}
+.gate::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 55%,#fff3c8,#f3c264 45%,#7a3d10 100%);opacity:0;transition:opacity .5s}
+.gate.open::before{animation:gateFlash 2.2s ease-out forwards}
+@keyframes gateFlash{0%{opacity:0}25%{opacity:.95}100%{opacity:0}}
+.gate.open{pointer-events:none}
+.gate.open .gl{transform:rotateY(-106deg);filter:brightness(.7)}
+.gate.open .gr{transform:rotateY(106deg);filter:brightness(.7)}
+.gate.gone{visibility:hidden}
+.gate:not(.open) .gl b{animation:gateKnockL 3.4s ease-in-out infinite}
+.gate:not(.open) .gr b{animation:gateKnockR 3.4s ease-in-out infinite}
+@keyframes gateKnockL{0%,82%,100%{transform:none}90%{transform:perspective(900px) rotateY(-7deg)}}
+@keyframes gateKnockR{0%,82%,100%{transform:none}90%{transform:perspective(900px) rotateY(7deg)}}
+.gate-label{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);display:flex;align-items:center;gap:9px;white-space:nowrap;padding:13px 20px;border-radius:40px;
+  font:600 13px/1 'Cormorant SC',serif;letter-spacing:.16em;color:#2a1405;background:linear-gradient(#ffeab0,#d9a548);box-shadow:0 0 0 1px #fff3cf88 inset,0 8px 26px #000b;
+  animation:gatePulse 2.2s ease-in-out infinite;transition:opacity .4s}
+.gate-label b{width:9px;height:14px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff6c8,#ffb52e 55%,#e05a0b)}
+@keyframes gatePulse{50%{box-shadow:0 0 0 1px #fff3cf88 inset,0 8px 26px #000b,0 0 0 12px #f0c27a00,0 0 26px #f0c27aaa}}
+.gate.open .gate-label{opacity:0}
+@media (prefers-reduced-motion:reduce){.gate i b,.gate-label{animation:none!important}}

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14206e">
+<title>Srishty & Shubham · Wedding Invitation</title>
+<meta name="description" content="Srishty weds Shubham · 10 December 2026 · Haridwar">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@500;600;700&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body class="locked">
+
+<header class="topbar" id="topbar">
+  <button class="pill" id="close-again"><span>↻</span> Close it again</button>
+  <button class="music" id="music" aria-label="Pause music" aria-pressed="false"><span class="note">♪</span><span class="bars"><i></i><i></i><i></i></span></button>
+</header>
+
+<main class="invite">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <video class="hero-video v-light" id="v-light" src="hero-light.mp4" poster="hero-unlit.jpg" muted playsinline webkit-playsinline preload="auto"></video>
+    <video class="hero-video v-loop" id="v-loop" src="hero-fireworks.mp4" poster="hero-lit.jpg" muted playsinline webkit-playsinline loop preload="auto"></video>
+    <div class="hero-shade"></div>
+
+    <div class="hero-text before">
+      <p class="script big">You're invited</p>
+      <p class="sc">to a wedding in Haridwar</p>
+    </div>
+
+    <div class="hero-text after">
+      <p class="lead small">Welcome to the wedding of</p>
+      <p class="script names">Srishty</p>
+      <p class="script amp">&amp;</p>
+      <p class="script names">Shubham</p>
+      <div class="orn"></div>
+      <p class="sc">10 December 2026</p>
+      <p class="sc tiny">Haridwar</p>
+    </div>
+
+    <p class="tap-hint" id="tap-hint">Tap to light the diyas</p>
+    <a class="scroll-hint" href="#date">Scroll down<span></span></a>
+  </section>
+
+  <!-- ============ THE DATE ============ -->
+  <section class="sec date" id="date">
+    <h2 class="script title reveal">The Date</h2>
+    <div class="orn reveal"></div>
+    <p class="hint reveal">✦ Tap the doors to reveal the date ✦</p>
+    <div class="doors reveal" id="doors">
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the day"><span class="val num">10</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Day</span></div>
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the month"><span class="val word">December</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Month</span></div>
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the year"><span class="val num">2026</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Year</span></div>
+    </div>
+    <p class="day-line" id="day-line">Thursday, 10 December 2026</p>
+  </section>
+
+  <!-- ============ BLESSING ARCH ============ -->
+  <section class="sec blessing" id="blessing">
+    <div class="arch reveal" id="arch">
+      <div class="rays" aria-hidden="true"></div>
+      <div class="aura" aria-hidden="true"></div>
+      <svg class="arch-line" viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" aria-label="Shiva and Parvati">
+        <defs>
+          <clipPath id="archclip"><path d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440Z"/></clipPath>
+        </defs>
+        <image class="art-img" href="shiva-parvati.jpg" x="20" y="60" width="260" height="380" preserveAspectRatio="xMidYMid slice" clip-path="url(#archclip)"/>
+        <path class="gold" d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440"/>
+        <path d="M14 440V176C14 128 58 104 96 80C122 63 140 44 150 20C160 44 178 63 204 80C242 104 286 128 286 176V440" />
+        <path class="in" d="M26 440V180C26 136 66 114 102 91C126 75 142 58 150 38C158 58 174 75 198 91C234 114 274 136 274 180V440" />
+        <ellipse cx="150" cy="10" rx="3.2" ry="7" />
+      </svg>
+      <svg class="arch-fx" viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <clipPath id="archclip2"><path d="M44 440V194C44 156 78 134 110 114C131 100 144 85 150 66C156 85 169 100 190 114C222 134 256 156 256 194V440Z"/></clipPath>
+          <linearGradient id="sheenG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff6dc" stop-opacity=".34"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g clip-path="url(#archclip2)"><rect class="sheen" x="-130" y="40" width="74" height="420" fill="url(#sheenG)"/></g>
+        <path class="beam" pathLength="100" d="M14 440V176C14 128 58 104 96 80C122 63 140 44 150 20C160 44 178 63 204 80C242 104 286 128 286 176V440"/>
+      </svg>
+      <div class="petal-fall" id="petal-fall" aria-hidden="true"></div>
+      <img class="lamp l" src="diya-lit.png" alt=""><img class="lamp r" src="diya-lit.png" alt="">
+    </div>
+    <p class="hindi mantra reveal">॥ ॐ नमः शिवाय ॥</p>
+    <div class="orn reveal"></div>
+    <div class="medallion reveal" id="medallion" aria-label="Srishty and Shubham monogram">
+      <div class="m-glow"></div>
+      <svg viewBox="0 0 300 300">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#b98a3c"/><stop offset=".35" stop-color="#fbe7b5"/><stop offset=".5" stop-color="#fff8e1"/><stop offset=".65" stop-color="#e6bf74"/><stop offset="1" stop-color="#a87b33"/>
+            <animateTransform attributeName="gradientTransform" type="translate" values="-1 -1;1 1;-1 -1" dur="6s" repeatCount="indefinite"/>
+          </linearGradient>
+          <linearGradient id="gold2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3cf"/><stop offset="1" stop-color="#d9a548"/></linearGradient>
+          <path id="ring-t" d="M150 150m-124 0a124 124 0 1 1 248 0a124 124 0 1 1 -248 0"/>
+        </defs>
+        <g class="spin-slow">
+          <text class="ring-txt"><textPath href="#ring-t" startOffset="0" textLength="772" lengthAdjust="spacing">SRISHTY ✦ SHUBHAM ✦ 10 · XII · 2026 ✦ HARIDWAR ✦ SRISHTY ✦ SHUBHAM ✦ 10 · XII · 2026 ✦ HARIDWAR ✦</textPath></text>
+        </g>
+        <circle class="ln" cx="150" cy="150" r="112"/>
+        <g class="spin-rev"><circle class="bd" style="--i:0" transform="rotate(5.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:1" transform="rotate(16.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:2" transform="rotate(28.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:3" transform="rotate(39.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:4" transform="rotate(50.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:5" transform="rotate(61.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:6" transform="rotate(73.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:7" transform="rotate(84.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:8" transform="rotate(95.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:9" transform="rotate(106.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:10" transform="rotate(118.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:11" transform="rotate(129.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:12" transform="rotate(140.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:13" transform="rotate(151.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:14" transform="rotate(163.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:15" transform="rotate(174.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:16" transform="rotate(185.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:17" transform="rotate(196.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:18" transform="rotate(208.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:19" transform="rotate(219.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:20" transform="rotate(230.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:21" transform="rotate(241.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:22" transform="rotate(253.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:23" transform="rotate(264.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:24" transform="rotate(275.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:25" transform="rotate(286.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:26" transform="rotate(298.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:27" transform="rotate(309.35 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:28" transform="rotate(320.6 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:29" transform="rotate(331.85 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:30" transform="rotate(343.1 150 150)" cx="150" cy="38" r="1.6"/><circle class="bd" style="--i:31" transform="rotate(354.35 150 150)" cx="150" cy="38" r="1.6"/></g>
+        <g class="petals"><path class="pt2" style="--i:0" transform="rotate(11.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:1" transform="rotate(33.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:2" transform="rotate(56.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:3" transform="rotate(78.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:4" transform="rotate(101.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:5" transform="rotate(123.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:6" transform="rotate(146.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:7" transform="rotate(168.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:8" transform="rotate(191.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:9" transform="rotate(213.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:10" transform="rotate(236.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:11" transform="rotate(258.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:12" transform="rotate(281.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:13" transform="rotate(303.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:14" transform="rotate(326.25 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><path class="pt2" style="--i:15" transform="rotate(348.75 150 150)" d="M150 66C158 78 158 90 150 100C142 90 142 78 150 66Z"/><circle class="tip" transform="rotate(0.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(22.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(45.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(67.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(90.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(112.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(135.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(157.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(180.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(202.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(225.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(247.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(270.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(292.5 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(315.0 150 150)" cx="150" cy="47" r="2.2"/><circle class="tip" transform="rotate(337.5 150 150)" cx="150" cy="47" r="2.2"/><path class="pt" style="--i:0" transform="rotate(0.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:1" transform="rotate(22.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:2" transform="rotate(45.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:3" transform="rotate(67.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:4" transform="rotate(90.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:5" transform="rotate(112.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:6" transform="rotate(135.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:7" transform="rotate(157.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:8" transform="rotate(180.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:9" transform="rotate(202.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:10" transform="rotate(225.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:11" transform="rotate(247.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:12" transform="rotate(270.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:13" transform="rotate(292.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:14" transform="rotate(315.0 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/><path class="pt" style="--i:15" transform="rotate(337.5 150 150)" d="M150 52C163 70 163 88 150 102C137 88 137 70 150 52Z"/></g>
+        <circle class="ln thin" cx="150" cy="150" r="56"/>
+        <circle class="core" cx="150" cy="150" r="54"/>
+        <text class="mono" x="150" y="168"><tspan class="s1">S</tspan><tspan class="amp" dx="-2" dy="-6">&amp;</tspan><tspan class="s2" dx="-2" dy="6">S</tspan></text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ INVITATION CARD ============ -->
+  <section class="sec card-sec">
+    <div class="card framed reveal" id="card">
+      <svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg>
+      <div class="crest" aria-hidden="true"></div>
+      <div class="motes" id="motes" aria-hidden="true"></div>
+      <p class="lead st" style="--s:0">With the blessings of our elders,<br>you are invited to the wedding of</p>
+      <p class="script who write" data-s="1">Srishty Chaudhary</p>
+      <div class="with-row st" style="--s:4"><i></i><p class="script with">with</p><i></i></div>
+      <p class="sc lbl st" style="--s:5">Major</p>
+      <p class="script who write" data-s="6">Shubham Singh Tomer</p>
+      <p class="when st" style="--s:10">Thursday, 10 December 2026</p>
+      <p class="where st" style="--s:11">Hotel Hyatt Place, Bahadarabad, Haridwar</p>
+    </div>
+  </section>
+
+  <!-- ============ THE ROYAL INVITATION ============ -->
+  <section class="sec royal-sec" id="royal">
+    <h2 class="script title reveal">The Royal Invitation</h2>
+    <div class="orn reveal"></div>
+    <p class="hint reveal">✦ The palace doors are waiting for you ✦</p>
+    <div class="scene framed" data-scene="opening" data-title="Wedding invitation"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-1.jpg')"><button class="gate" id="gate" aria-label="Open the palace doors"><i class="gl"><b></b></i><i class="gr"><b></b></i><span class="gate-label"><b></b>Tap to open the palace doors</span></button></div></div>
+    <p class="scene-hint">✦ Touch the couple to shower them with petals ✦</p>
+    <div class="scene framed" data-scene="family" data-title="Together with our families"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-2.jpg')"></div></div>
+    <p class="scene-hint">✦ Touch a hanging lantern to light it ✦</p>
+  </section>
+
+  <!-- ============ THE CELEBRATIONS ============ -->
+  <section class="sec celebrations royal-sec" id="celebrations">
+    <h2 class="script title reveal">The celebrations</h2>
+    <div class="orn reveal"></div>
+    <ol class="tl">
+      <li class="ev right reveal">
+        <div class="pic"><img src="icon-sangeet.png" alt="" loading="lazy"></div>
+        <i class="dia"></i>
+        <div class="txt">
+          <p class="sc d">Sat, 5 Dec</p>
+          <p class="script t">4:00 PM</p>
+          <h3>Bhaat &amp; Sangeet</h3>
+          <p class="hi">भात · संगीत</p>
+          <p class="v">Drive Inn 24, Shahnai Hall<br>Sangeet &amp; dinner at 8:00 PM</p>
+          <button class="cal" data-ev="bhaat">Add to calendar</button>
+        </div>
+      </li>
+      <li class="ev left reveal">
+        <div class="pic"><img src="icon-haldi.png" alt="" loading="lazy"></div>
+        <i class="dia"></i>
+        <div class="txt">
+          <p class="sc d">Wed, 9 Dec</p>
+          <p class="script t">12:00 PM</p>
+          <h3>Haldi</h3>
+          <p class="hi">हल्दी</p>
+          <p class="v">Hotel Grand Village</p>
+          <button class="cal" data-ev="haldi">Add to calendar</button>
+        </div>
+      </li>
+      <li class="ev right reveal">
+        <div class="pic"><img src="icon-wedding.png" alt="" loading="lazy"></div>
+        <i class="dia"></i>
+        <div class="txt">
+          <p class="sc d">Thu, 10 Dec</p>
+          <p class="script t">8:00 PM</p>
+          <h3>Wedding</h3>
+          <p class="hi">विवाह</p>
+          <p class="v">Hotel Hyatt Place, with dinner and the pheras</p>
+          <button class="cal" data-ev="wedding">Add to calendar</button>
+        </div>
+      </li>
+    </ol>
+    <p class="hint step reveal">✦ Step into each celebration ✦</p>
+    <div class="scene framed" data-scene="bhaat" data-title="Bhaat and Sangeet"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-bhaat.jpg')"></div></div>
+    <p class="scene-hint">✦ Touch the celebration to shower petals ✦</p>
+    <div class="scene framed" data-scene="haldi" data-title="Haldi"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-haldi.jpg')"></div></div>
+    <p class="scene-hint">✦ Touch the celebration to shower petals ✦</p>
+    <div class="scene framed" data-scene="dinner" data-title="Wedding dinner"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-3.jpg')"></div></div>
+    <p class="scene-hint">✦ Touch the groom, the sky or the elephants ✦</p>
+
+  </section>
+
+  <!-- ============ COUNTDOWN ============ -->
+  <section class="sec countdown" id="countdown">
+    <h2 class="script title reveal">The celebration begins</h2>
+    <div class="orn reveal"></div>
+    <div class="cd reveal" id="cd">
+      <div class="win"><div class="glass"><b id="cd-d">00</b></div><span>Days</span></div>
+      <div class="win"><div class="glass"><b id="cd-h">00</b></div><span>Hours</span></div>
+      <div class="win"><div class="glass"><b id="cd-m">00</b></div><span>Minutes</span></div>
+      <div class="win"><div class="glass"><b id="cd-s">00</b></div><span>Seconds</span></div>
+    </div>
+    <p class="until reveal" id="until">until the Wedding, on Thursday, 10 December</p>
+    <div class="ganga reveal" id="ganga" aria-label="Bhaat and Sangeet on 5 December, Haldi on 9 December, Wedding on 10 December">
+      <div class="float f1"><p class="ename">Bhaat &amp; Sangeet</p><p class="edate">5 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <div class="float f2"><p class="ename">Haldi</p><p class="edate">9 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <div class="float f3"><p class="ename">Wedding</p><p class="edate">10 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <svg class="water" viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true">
+        <g class="wv w1"><path d="M0 14 Q25 9 50 14 T100 14 Q125 9 150 14 T200 14 Q225 9 250 14 T300 14 Q325 9 350 14 T400 14 Q425 9 450 14 T500 14 Q525 9 550 14 T600 14 Q625 9 650 14 T700 14 Q725 9 750 14 T800 14"/></g>
+        <g class="wv w2"><path d="M0 32 Q25 26 50 32 T100 32 Q125 26 150 32 T200 32 Q225 26 250 32 T300 32 Q325 26 350 32 T400 32 Q425 26 450 32 T500 32 Q525 26 550 32 T600 32 Q625 26 650 32 T700 32 Q725 26 750 32 T800 32"/></g>
+        <g class="wv w3"><path d="M0 50 Q25 46 50 50 T100 50 Q125 46 150 50 T200 50 Q225 46 250 50 T300 50 Q325 46 350 50 T400 50 Q425 46 450 50 T500 50 Q525 46 550 50 T600 50 Q625 46 650 50 T700 50 Q725 46 750 50 T800 50"/></g>
+      </svg>
+      <div class="petals-drift" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- ============ LOCATION ============ -->
+  <section class="sec location royal-sec" id="location">
+    <h2 class="script title reveal">Location</h2>
+    <div class="orn reveal"></div>
+    <div class="scene framed" data-scene="venue" data-title="Venue"><svg class="frame" aria-hidden="true"><path class="ln f-out"/><path class="ln f-in"/><path class="f-cn"/><path class="f-beam" pathLength="100"/></svg><div class="scene-box" style="background-image:url('scene/clip-page-4.jpg')"></div></div>
+    <p class="scene-hint">✦ Touch the couple or the lotus pools ✦</p>
+    <p class="vname reveal">Hotel Hyatt Place</p>
+    <p class="vaddr reveal">NH-58, Near Toll Plaza, Bahadarabad, Haridwar</p>
+    <div class="venue-art reveal" id="venue-art"><img src="venue-map.jpg?v=1" alt="Illustrated map of Haridwar" loading="lazy"><span class="pin" style="--px:76%;--py:58%"></span></div>
+    <a class="go reveal" href="https://www.google.com/maps/search/?api=1&query=Hyatt+Place+Haridwar+Bahadarabad" target="_blank" rel="noopener"><span class="pin-ic"></span>Open in Maps</a>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing" id="closing">
+    <video class="closing-bg" id="closing-video" src="closing-aarti.mp4?v=1" poster="closing.jpg?v=1" muted playsinline webkit-playsinline loop preload="none"></video>
+    <div class="closing-text">
+      <p class="hindi reveal">आपकी उपस्थिति ही हमारा आशीर्वाद है</p>
+      <p class="lead reveal">Your presence is our greatest blessing</p>
+      <p class="script names reveal">Srishty &amp; Shubham</p>
+      <p class="sc tiny reveal">10 December 2026 · Haridwar</p>
+    </div>
+  </section>
+</main>
+
+<canvas id="sparkle"></canvas>
+<script src="app.js?v=1"></script>
+</body>
+</html>

@@ -41,7 +41,7 @@ document.addEventListener('wheel',e=>{if(isLocked())e.preventDefault()},{passive
 vLight.removeAttribute('autoplay');vLight.pause();vLight.load();
 vLight.addEventListener('play',()=>{if(!lit){vLight.pause();try{vLight.currentTime=0}catch(e){}}});
 function welcome(){if(welcomed)return;welcomed=true;document.body.classList.remove('locked')}
-function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit');welcome()}
+function toLoop(){if(hero.classList.contains('lit'))return;try{vLoop.currentTime=.9}catch(e){}vLoop.play().catch(()=>{});hero.classList.add('lit');welcome()}
 function light(){
   if(lit)return;lit=true;
   tapHint.style.display='none';hero.classList.add('lighting');requestAnimationFrame(()=>hero.classList.add('welcomed'));
@@ -53,8 +53,9 @@ function light(){
   setTimeout(()=>{if(!welcomed)toLoop()},14000); // safety net on very slow connections
 }
 // the welcome text follows the video itself, not a clock, so it never runs ahead of the lighting
-vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(3,d-.5))welcome();if(t>d-.15)toLoop()});
+vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(3,d-.5))welcome();if(t>=5.3)toLoop()});
 vLight.addEventListener('ended',()=>{if(lit)toLoop()});
+vLoop.preload='auto';vLoop.load();
 hero.addEventListener('click',e=>{if(!lit){e.preventDefault();light()}});
 $('#close-again').addEventListener('click',()=>{
   lit=false;welcomed=false;hero.classList.remove('lit','welcomed','lighting');vLoop.pause();vLight.pause();

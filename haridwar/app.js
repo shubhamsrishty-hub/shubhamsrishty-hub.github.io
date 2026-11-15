@@ -20,6 +20,13 @@ music.addEventListener('click',e=>{e.stopPropagation();wanted=audio.paused;wante
 audio.addEventListener('play',mui);audio.addEventListener('pause',mui);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!audio.paused){audio.pause();audio._r=1}}else if(audio._r&&wanted){audio._r=0;play()}});
 
+/* ---------------- welcome text: written word by word ---------------- */
+(()=>{let i=0;document.querySelectorAll('.hero-text.after > *').forEach(el=>{
+  if(el.classList.contains('orn')){el.style.setProperty('--d',(i*0.32)+'s');i+=2;return}
+  const words=el.textContent.trim().split(/\s+/);el.textContent='';
+  words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(i*0.32)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '));i++;});
+});})();
+
 /* ---------------- light the diyas ---------------- */
 const tapHint=$('#tap-hint');
 let lit=false,welcomed=false;
@@ -30,9 +37,9 @@ window.scrollTo(0,0);
 const isLocked=()=>document.body.classList.contains('locked');
 document.addEventListener('touchmove',e=>{if(isLocked())e.preventDefault()},{passive:false});
 document.addEventListener('wheel',e=>{if(isLocked())e.preventDefault()},{passive:false});
-// warm the lighting video up so it plays smoothly on the first tap
-vLight.load();
-const warm=vLight.play();warm&&warm.then(()=>{if(!lit){vLight.pause();vLight.currentTime=0}}).catch(()=>{});
+// preload only — never start the lighting until the guest taps
+vLight.removeAttribute('autoplay');vLight.pause();vLight.load();
+vLight.addEventListener('play',()=>{if(!lit){vLight.pause();try{vLight.currentTime=0}catch(e){}}});
 function welcome(){if(welcomed)return;welcomed=true;hero.classList.add('welcomed');document.body.classList.remove('locked')}
 function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit');welcome()}
 function light(){

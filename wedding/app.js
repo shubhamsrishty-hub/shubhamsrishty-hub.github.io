@@ -116,7 +116,7 @@ $$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
     bhaat:['clip-page-bhaat','Touch the celebration to shower petals','Bhaat and Sangeet'],haldi:['clip-page-haldi','Touch the celebration to shower petals','Haldi'],
     dinner:['clip-page-3','Touch the groom, the sky or the elephants','Wedding dinner'],venue:['clip-page-4','Touch the couple or the lotus pools','The venue']};
   const W0=400,H0=710,card=$('#rv-card'),box=$('#rv-box'),hint=$('#rv-hint'),dots=$('#rv-dots'),gate=$('#gate');
-  let cur=0,frame=null,ready=false,origin=null,isOpen=false,pushed=false,busy=false,k=1,swiped=false;
+  let savedY=0,cur=0,frame=null,ready=false,origin=null,isOpen=false,pushed=false,busy=false,k=1,swiped=false;
   frameFor(card,0,1.5,5.5);
   ORDER.forEach(()=>dots.appendChild(document.createElement('i')));
   const ctl=()=>{try{return frame&&ready&&frame.contentWindow.sceneCtl||null}catch(e){return null}};
@@ -139,17 +139,20 @@ $$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
     const s=Math.max(.08,Math.min(r.width/c.width,r.height/c.height)),dx=r.left+r.width/2-(c.left+c.width/2),dy=r.top+r.height/2-(c.top+c.height/2);
     const from={transform:`translate(${dx}px,${dy}px) scale(${s})`,opacity:0},to={transform:'none',opacity:1};
     return card.animate(opening?[from,to]:[to,from],{duration:opening?800:520,easing:opening?'cubic-bezier(.2,.75,.2,1)':'cubic-bezier(.5,0,.75,.45)',fill:'both'})}
-  function open(key,el){if(isOpen)return;isOpen=true;origin=el||null;rv.hidden=false;void rv.offsetWidth;size();load(ORDER.indexOf(key),0);
+  function open(key,el){if(isOpen)return;isOpen=true;savedY=window.scrollY;origin=el||null;rv.hidden=false;void rv.offsetWidth;size();load(ORDER.indexOf(key),0);
     rv.classList.add('on');document.body.classList.add('viewing');
     card.classList.remove('awake');void card.offsetWidth;card.classList.add('awake');flip(true);
     if(!pushed){try{history.pushState({royal:1},'');pushed=true}catch(e){}}}
   function shut(){if(!isOpen)return;isOpen=false;const c=ctl();c&&c.pause();
     const a=flip(false);rv.classList.remove('on');document.body.classList.remove('viewing');
-    const done=()=>{if(isOpen)return;rv.hidden=true;if(frame){frame.remove();frame=null}ready=false;box.classList.remove('ready');card.getAnimations&&card.getAnimations().forEach(x=>x.cancel());
+    const back=()=>{if(Math.abs(window.scrollY-savedY)>1)window.scrollTo(0,savedY)};
+    const done=()=>{if(isOpen)return;rv.hidden=true;back();if(frame){frame.remove();frame=null}ready=false;box.classList.remove('ready');card.getAnimations&&card.getAnimations().forEach(x=>x.cancel());
       if(gate)gate.classList.remove('open')};
-    setTimeout(done,a?600:560)}
+    setTimeout(done,a?600:560);back();[60,200,450].forEach(t=>setTimeout(()=>{if(!isOpen)back()},t))}
   function close(){if(pushed){pushed=false;try{history.back();return}catch(e){}}shut()}
+  try{history.scrollRestoration='manual'}catch(e){}
   addEventListener('popstate',()=>{if(isOpen){pushed=false;shut()}});
+  rv.addEventListener('touchmove',e=>{e.preventDefault()},{passive:false});
   function go(d){if(!isOpen||busy)return;busy=true;const c=ctl();c&&c.pause();load(cur+d,d);setTimeout(()=>busy=false,500)}
   $('#rv-close').addEventListener('click',close);$('#rv-back').addEventListener('click',close);
   $('#rv-prev').addEventListener('click',()=>go(-1));$('#rv-next').addEventListener('click',()=>go(1));

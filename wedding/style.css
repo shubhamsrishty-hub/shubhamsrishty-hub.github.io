@@ -415,7 +415,6 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 .gate.open .gate-label{opacity:0}
 
 /* ================= the royal viewer: royal pages on the same blue paper ================= */
-body.viewing{overflow:hidden}
 .rv{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 0 10px;
   opacity:0;transition:opacity .55s ease}
 .rv[hidden]{display:none}

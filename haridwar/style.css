@@ -271,9 +271,9 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 @keyframes sail{to{opacity:1;transform:none}}
 .ename{font:400 25px/1.05 'Great Vibes',cursive;color:#fde3ae;text-shadow:0 2px 8px #0005;min-height:52px;display:flex;align-items:flex-end;justify-content:center}
 .edate{font:600 11px 'Cormorant SC',serif;letter-spacing:.28em;text-transform:uppercase;color:#dfe4ff;margin:4px 0 6px}
-.boat{position:relative;width:62px;height:96px;margin:0 auto;animation:bob 3.2s ease-in-out infinite}
+.boat{position:relative;width:62px;height:96px;margin:0 auto;animation:boatBob 3.2s ease-in-out infinite}
 .f2 .boat{animation-delay:-1.1s}.f3 .boat{animation-delay:-2.1s}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(5px) rotate(2deg)}}
+@keyframes boatBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(5px) rotate(2deg)}}
 .boat img{position:absolute;left:0;top:0;width:62px;filter:drop-shadow(0 0 10px #ffcf6a88)}
 .boat img:first-child{animation:glowf 2.2s ease-in-out infinite}
 @keyframes glowf{50%{filter:drop-shadow(0 0 18px #ffcf6acc) brightness(1.08)}}

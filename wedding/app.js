@@ -34,7 +34,7 @@ let lit=false,welcomed=false;
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 if(location.hash)history.replaceState(null,'',location.pathname);
 window.scrollTo(0,0);
-const isLocked=()=>document.body.classList.contains('locked');
+const isLocked=()=>document.body.classList.contains('locked')||document.body.classList.contains('viewing');
 document.addEventListener('touchmove',e=>{if(isLocked())e.preventDefault()},{passive:false});
 document.addEventListener('wheel',e=>{if(isLocked())e.preventDefault()},{passive:false});
 // preload only — never start the lighting until the guest taps
@@ -80,7 +80,7 @@ new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cvid.preload='a
   for(let i=0;i<11;i++){const el=document.createElement('i');
     el.style.cssText=`--x:${Math.round(Math.random()*96)}%;--t:${(10+Math.random()*7).toFixed(1)}s;--dl:${(-Math.random()*16).toFixed(1)}s;--c:${cols[i%5]};--sw:${Math.round(Math.random()*44-22)}px;--z:${(7+Math.random()*5).toFixed(1)}px`;pf.appendChild(el)}})();
 
-/* ---------------- gold frames that draw themselves (invitation card and royal paintings) ---------------- */
+/* ---------------- gold frames that draw themselves ---------------- */
 function frameFor(el,g,mo,mi){const svg=el.querySelector(':scope>.frame');if(!svg)return;
   const out=svg.querySelector('.f-out'),inn=svg.querySelector('.f-in'),beam=svg.querySelector('.f-beam'),cn=svg.querySelector('.f-cn');
   function draw(){const w=el.offsetWidth,h=el.offsetHeight;if(!w||!h)return;const c=w/2;
@@ -93,6 +93,8 @@ function frameFor(el,g,mo,mi){const svg=el.querySelector(':scope>.frame');if(!sv
   draw();addEventListener('resize',draw);
   if(window.ResizeObserver)new ResizeObserver(draw).observe(el);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);}
+$$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){el.classList.add('awake');o.disconnect()}}),{threshold:.2}).observe(el)});
 
 /* ---------------- invitation card: gold dust and written names ---------------- */
 (()=>{const card=$('#card');if(!card)return;
@@ -104,32 +106,74 @@ function frameFor(el,g,mo,mi){const svg=el.querySelector(':scope>.frame');if(!sv
   new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){card.classList.add('awake');o.disconnect()}}),{threshold:.22}).observe(card);
 })();
 
-/* ---------------- royal living paintings ----------------
-   Each royal page lives in its own small document, loaded only while it is near the screen
-   and played only while it is actually being looked at. */
-(()=>{const scenes=$$('.scene');if(!scenes.length)return;
-  const ctl=sc=>{try{return sc._f&&sc._loaded&&sc._f.contentWindow.sceneCtl||null}catch(e){return null}};
-  function sync(sc){const c=ctl(sc);if(!c)return;(sc._vis&&!sc._gated)?c.play():c.pause()}
-  function mount(sc){if(sc._f)return;const f=document.createElement('iframe');f.title=sc.dataset.title||'Royal scene';
-    f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay');f.src='scene/'+sc.dataset.scene+'.html?v=1';
-    f.addEventListener('load',()=>{if(sc._f!==f)return;sc._loaded=true;sc.classList.add('ready');sync(sc)});
-    sc.querySelector('.scene-box').prepend(f);sc._f=f}
-  function unmount(sc){if(!sc._f)return;sc._f.remove();sc._f=null;sc._loaded=false;sc.classList.remove('ready')}
-  const near=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?mount(e.target):unmount(e.target)),{rootMargin:'140% 0px 140% 0px'});
-  const seen=new IntersectionObserver(es=>es.forEach(e=>{const sc=e.target;sc._vis=e.intersectionRatio>=.3;if(e.intersectionRatio>=.12)sc.classList.add('awake');sync(sc)}),{threshold:[0,.12,.3,.6]});
-  // a tap on a painting is handed to whatever lies under the finger inside it (couple, lantern, peacock…)
-  function tap(sc,e){if(e.target.closest('.gate'))return;const f=sc._f,c=ctl(sc);if(!f||!c)return;
-    try{const r=f.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,w=f.contentWindow,t=f.contentDocument.elementFromPoint(x,y),b=t&&t.closest('[data-touch],button');
-      if(sc._vis&&!sc._gated)c.play();
-      if(b)b.dispatchEvent(new w.MouseEvent('click',{bubbles:true,cancelable:true,clientX:x,clientY:y,view:w}));}catch(err){}}
-  scenes.forEach(sc=>{frameFor(sc,0,1.5,5.5);near.observe(sc);seen.observe(sc);sc.querySelector('.scene-box').addEventListener('click',e=>tap(sc,e))});
-  // the palace doors over the first painting
-  const gate=$('#gate');if(gate){const sc=gate.closest('.scene');sc._gated=true;let timer;
-    function open(){if(gate.classList.contains('open'))return;clearTimeout(timer);gate.classList.add('open');sc._gated=false;
-      const r=gate.getBoundingClientRect();setTimeout(()=>burst(r.left+r.width/2,r.top+r.height*.45,80),500);
-      const c=ctl(sc);if(c)c.restart();else sync(sc);setTimeout(()=>gate.classList.add('gone'),2600)}
-    gate.addEventListener('click',open);
-    new IntersectionObserver(es=>es.forEach(e=>{clearTimeout(timer);if(e.intersectionRatio>=.75&&!gate.classList.contains('open'))timer=setTimeout(open,4500)}),{threshold:[0,.75]}).observe(gate);}
+/* ---------------- the royal invitation, opened by touch ----------------
+   The palace doors, each celebration and the map open the matching royal page in a viewer on the
+   same blue paper. Inside, guests can turn through all six royal pages. A royal page is its own
+   small document (scene/…html); it never takes the finger, so swipes and taps stay ours. */
+(()=>{const rv=$('#rv');if(!rv)return;
+  const ORDER=['opening','family','bhaat','haldi','dinner','venue'];
+  const INFO={opening:['clip-page-1','Touch the couple to shower them with petals','Wedding invitation'],family:['clip-page-2','Touch a hanging lantern to light it','Together with our families'],
+    bhaat:['clip-page-bhaat','Touch the celebration to shower petals','Bhaat and Sangeet'],haldi:['clip-page-haldi','Touch the celebration to shower petals','Haldi'],
+    dinner:['clip-page-3','Touch the groom, the sky or the elephants','Wedding dinner'],venue:['clip-page-4','Touch the couple or the lotus pools','The venue']};
+  const W0=400,H0=710,card=$('#rv-card'),box=$('#rv-box'),hint=$('#rv-hint'),dots=$('#rv-dots'),gate=$('#gate');
+  let cur=0,frame=null,ready=false,origin=null,isOpen=false,pushed=false,busy=false,k=1,swiped=false;
+  frameFor(card,0,1.5,5.5);
+  ORDER.forEach(()=>dots.appendChild(document.createElement('i')));
+  const ctl=()=>{try{return frame&&ready&&frame.contentWindow.sceneCtl||null}catch(e){return null}};
+  function size(){const vv=window.visualViewport,vw=vv?vv.width:innerWidth,vh=vv?vv.height:innerHeight;
+    const w=Math.max(200,Math.min(vw-30,470,(vh-104)*476/845));k=w/W0;
+    box.style.width=w+'px';box.style.height=(w*845/476)+'px';if(frame)frame.style.transform=`scale(${k})`;}
+  size();addEventListener('resize',size);if(window.visualViewport)visualViewport.addEventListener('resize',size);
+  function load(i,dir){cur=(i+ORDER.length)%ORDER.length;const key=ORDER[cur],[poster,h,title]=INFO[key];
+    if(frame){frame.remove();frame=null}ready=false;box.classList.remove('ready');
+    box.style.backgroundImage=`url('scene/${poster}.jpg')`;hint.textContent='✦ '+h+' ✦';
+    [...dots.children].forEach((d,n)=>d.classList.toggle('on',n===cur));
+    box.classList.remove('turn-l','turn-r');if(dir&&!reduce){void box.offsetWidth;box.classList.add(dir>0?'turn-l':'turn-r')}
+    const f=document.createElement('iframe');f.title=title;f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay');f.setAttribute('tabindex','-1');
+    f.style.transform=`scale(${k})`;f.src='scene/'+key+'.html?v=2';
+    f.addEventListener('load',()=>{if(frame!==f)return;ready=true;box.classList.add('ready');const c=ctl();if(c&&isOpen)c.play()});
+    box.prepend(f);frame=f}
+  function flip(opening){if(reduce||!origin||!card.animate)return null;
+    card.getAnimations().forEach(a=>a.cancel());
+    const r=origin.getBoundingClientRect(),c=card.getBoundingClientRect();if(!c.width||!r.width)return null;
+    const s=Math.max(.08,Math.min(r.width/c.width,r.height/c.height)),dx=r.left+r.width/2-(c.left+c.width/2),dy=r.top+r.height/2-(c.top+c.height/2);
+    const from={transform:`translate(${dx}px,${dy}px) scale(${s})`,opacity:0},to={transform:'none',opacity:1};
+    return card.animate(opening?[from,to]:[to,from],{duration:opening?800:520,easing:opening?'cubic-bezier(.2,.75,.2,1)':'cubic-bezier(.5,0,.75,.45)',fill:'both'})}
+  function open(key,el){if(isOpen)return;isOpen=true;origin=el||null;rv.hidden=false;void rv.offsetWidth;size();load(ORDER.indexOf(key),0);
+    rv.classList.add('on');document.body.classList.add('viewing');
+    card.classList.remove('awake');void card.offsetWidth;card.classList.add('awake');flip(true);
+    if(!pushed){try{history.pushState({royal:1},'');pushed=true}catch(e){}}}
+  function shut(){if(!isOpen)return;isOpen=false;const c=ctl();c&&c.pause();
+    const a=flip(false);rv.classList.remove('on');document.body.classList.remove('viewing');
+    const done=()=>{if(isOpen)return;rv.hidden=true;if(frame){frame.remove();frame=null}ready=false;box.classList.remove('ready');card.getAnimations&&card.getAnimations().forEach(x=>x.cancel());
+      if(gate)gate.classList.remove('open')};
+    setTimeout(done,a?600:560)}
+  function close(){if(pushed){pushed=false;try{history.back();return}catch(e){}}shut()}
+  addEventListener('popstate',()=>{if(isOpen){pushed=false;shut()}});
+  function go(d){if(!isOpen||busy)return;busy=true;const c=ctl();c&&c.pause();load(cur+d,d);setTimeout(()=>busy=false,500)}
+  $('#rv-close').addEventListener('click',close);$('#rv-back').addEventListener('click',close);
+  $('#rv-prev').addEventListener('click',()=>go(-1));$('#rv-next').addEventListener('click',()=>go(1));
+  document.addEventListener('keydown',e=>{if(!isOpen)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+  // swipe sideways to turn the page, swipe down to close
+  let t0=null;
+  rv.addEventListener('touchstart',e=>{const t=e.touches[0];t0={x:t.clientX,y:t.clientY};swiped=false},{passive:true});
+  rv.addEventListener('touchend',e=>{if(!t0)return;const t=e.changedTouches[0],dx=t.clientX-t0.x,dy=t.clientY-t0.y;t0=null;
+    if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4){swiped=true;go(dx<0?1:-1)}
+    else if(dy>95&&dy>Math.abs(dx)*1.4){swiped=true;close()}},{passive:true});
+  // a tap on the painting is handed to whatever lies under the finger inside it (couple, lantern, sky…)
+  box.addEventListener('click',e=>{if(swiped){swiped=false;return}const c=ctl();if(!isOpen||!frame||!c)return;
+    try{const r=box.getBoundingClientRect(),x=(e.clientX-r.left)/k,y=(e.clientY-r.top)/k,w=frame.contentWindow,t=frame.contentDocument.elementFromPoint(x,y),b=t&&t.closest('[data-touch],button');
+      c.play();if(b)b.dispatchEvent(new w.MouseEvent('click',{bubbles:true,cancelable:true,clientX:x,clientY:y,view:w}));}catch(err){}});
+  // touch points on the invitation
+  $$('[data-open]').forEach(el=>{const key=el.dataset.open,from=()=>el.querySelector('.pic img')||el;
+    el.addEventListener('click',e=>{if(e.target.closest('.cal,a'))return;open(key,from())});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();open(key,from())}})});
+  if(gate)gate.addEventListener('click',()=>{if(gate.classList.contains('open'))return;gate.classList.add('open');
+    const r=gate.getBoundingClientRect();setTimeout(()=>burst(r.left+r.width/2,r.top+r.height*.45,60),450);
+    setTimeout(()=>open('opening',$('#palace-box')),reduce?0:1150)});
+  // have the paintings' first frames ready before anyone asks for them
+  const sec=$('#royal');if(sec)new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
+    ORDER.forEach(key=>{const im=new Image();im.src='scene/'+INFO[key][0]+'.jpg'})}),{rootMargin:'100% 0px'}).observe(sec);
 })();
 
 /* ---------------- sparkles ---------------- */

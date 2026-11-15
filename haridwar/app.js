@@ -19,23 +19,38 @@ audio.addEventListener('play',mui);audio.addEventListener('pause',mui);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!audio.paused){audio.pause();audio._r=1}}else if(audio._r&&wanted){audio._r=0;play()}});
 
 /* ---------------- light the diyas ---------------- */
-let lit=false;
-function welcome(){hero.classList.add('welcomed');document.body.classList.remove('locked')}
-function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit')}
+const tapHint=$('#tap-hint');
+let lit=false,welcomed=false;
+// keep the opening screen still until the diyas are lit (iOS ignores overflow:hidden for touch scrolling)
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+if(location.hash)history.replaceState(null,'',location.pathname);
+window.scrollTo(0,0);
+const isLocked=()=>document.body.classList.contains('locked');
+document.addEventListener('touchmove',e=>{if(isLocked())e.preventDefault()},{passive:false});
+document.addEventListener('wheel',e=>{if(isLocked())e.preventDefault()},{passive:false});
+// warm the lighting video up so it plays smoothly on the first tap
+vLight.load();
+const warm=vLight.play();warm&&warm.then(()=>{if(!lit){vLight.pause();vLight.currentTime=0}}).catch(()=>{});
+function welcome(){if(welcomed)return;welcomed=true;hero.classList.add('welcomed');document.body.classList.remove('locked')}
+function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit');welcome()}
 function light(){
-  if(lit)return;lit=true;hero.classList.add('lighting');
-  if(location.hash)history.replaceState(null,'',location.pathname);window.scrollTo(0,0);
+  if(lit)return;lit=true;
+  tapHint.style.display='none';hero.classList.add('lighting');
+  window.scrollTo(0,0);
   if(wanted)play();topbar.classList.add('show');
-  if(reduce){hero.classList.add('lit');welcome();return}
-  vLight.currentTime=0;
-  vLight.play().then(()=>setTimeout(welcome,4200)).catch(()=>{toLoop();welcome()});
+  if(reduce){toLoop();return}
+  try{vLight.currentTime=0}catch(e){}
+  const p=vLight.play();p&&p.catch(()=>toLoop());
+  setTimeout(()=>{if(!welcomed)toLoop()},14000); // safety net on very slow connections
 }
-vLight.addEventListener('ended',toLoop);
-vLight.addEventListener('timeupdate',()=>{if(vLight.duration&&vLight.currentTime>vLight.duration-.12)toLoop()});
+// the welcome text follows the video itself, not a clock, so it never runs ahead of the lighting
+vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(4.2,d-.5))welcome();if(t>d-.15)toLoop()});
+vLight.addEventListener('ended',()=>{if(lit)toLoop()});
 hero.addEventListener('click',e=>{if(!lit){e.preventDefault();light()}});
 $('#close-again').addEventListener('click',()=>{
-  lit=false;hero.classList.remove('lit','welcomed','lighting');vLoop.pause();vLight.pause();vLight.currentTime=0;
-  topbar.classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});
+  lit=false;welcomed=false;hero.classList.remove('lit','welcomed','lighting');vLoop.pause();vLight.pause();
+  try{vLight.currentTime=0}catch(e){}
+  tapHint.style.display='';topbar.classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(()=>document.body.classList.add('locked'),700);
 });
 

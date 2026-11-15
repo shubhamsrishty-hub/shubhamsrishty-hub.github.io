@@ -7,9 +7,9 @@
 <title>Srishty & Shubham · A Wedding in Haridwar</title>
 <meta name="description" content="Srishty weds Shubham · 10 December 2026 · Haridwar">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@500;600;700&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body class="locked">
 
@@ -49,11 +49,11 @@
   <section class="sec date" id="date">
     <h2 class="script title reveal">The Date</h2>
     <div class="orn reveal"></div>
-    <p class="hint reveal">✦ Scratch to reveal the date ✦</p>
-    <div class="scratch-row reveal" id="scratch-row">
-      <div class="sc-wrap"><div class="scratch"><div class="under"><b>10</b></div><canvas></canvas></div><span>Day</span></div>
-      <div class="sc-wrap"><div class="scratch"><div class="under"><b class="word">December</b></div><canvas></canvas></div><span>Month</span></div>
-      <div class="sc-wrap"><div class="scratch"><div class="under"><b>2026</b></div><canvas></canvas></div><span>Year</span></div>
+    <p class="hint reveal">✦ Tap the doors to reveal the date ✦</p>
+    <div class="doors reveal" id="doors">
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the day"><span class="val num">10</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Day</span></div>
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the month"><span class="val word">December</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Month</span></div>
+      <div class="dw"><button class="portal" aria-label="Open the door to reveal the year"><span class="val num">2026</span><i class="leaf l"></i><i class="leaf r"></i></button><span>Year</span></div>
     </div>
     <p class="day-line" id="day-line">Thursday, 10 December 2026</p>
   </section>
@@ -184,6 +184,6 @@
 </main>
 
 <canvas id="sparkle"></canvas>
-<script src="app.js?v=10"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

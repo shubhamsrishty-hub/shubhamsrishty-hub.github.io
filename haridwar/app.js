@@ -22,9 +22,9 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!audio.
 
 /* ---------------- welcome text: written word by word ---------------- */
 (()=>{let i=0;document.querySelectorAll('.hero-text.after > *').forEach(el=>{
-  if(el.classList.contains('orn')){el.style.setProperty('--d',(i*0.32)+'s');i+=2;return}
+  if(el.classList.contains('orn')){el.style.setProperty('--d',(i*0.17)+'s');i+=2;return}
   const words=el.textContent.trim().split(/\s+/);el.textContent='';
-  words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(i*0.32)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '));i++;});
+  words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(i*0.17)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '));i++;});
 });})();
 
 /* ---------------- light the diyas ---------------- */
@@ -53,7 +53,7 @@ function light(){
   setTimeout(()=>{if(!welcomed)toLoop()},14000); // safety net on very slow connections
 }
 // the welcome text follows the video itself, not a clock, so it never runs ahead of the lighting
-vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(4.2,d-.5))welcome();if(t>d-.15)toLoop()});
+vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(3.6,d-.5))welcome();if(t>d-.15)toLoop()});
 vLight.addEventListener('ended',()=>{if(lit)toLoop()});
 hero.addEventListener('click',e=>{if(!lit){e.preventDefault();light()}});
 $('#close-again').addEventListener('click',()=>{
@@ -80,29 +80,13 @@ function tick(t){const dt=Math.min(2.5,(t-last)/16.7);last=t;cx.clearRect(0,0,in
   for(const p of parts){p.vy+=.06*dt;p.vx*=.985;p.x+=p.vx*dt;p.y+=p.vy*dt;cx.globalAlpha=Math.min(1,p.l*1.6);cx.fillStyle=p.c;cx.shadowBlur=6;cx.shadowColor=p.c;cx.beginPath();cx.arc(p.x,p.y,p.s,0,7);cx.fill()}
   cx.globalAlpha=1;cx.shadowBlur=0;if(parts.length)requestAnimationFrame(tick);else running=false}
 
-/* ---------------- scratch cards (gold foil) ---------------- */
-const row=$('#scratch-row');let doneCount=0;
-$$('.scratch').forEach((card,idx)=>{
-  const c=card.querySelector('canvas'),g=c.getContext('2d');let ready=false,down=false,lastP=null,checks=0;
-  function paint(){const r=c.getBoundingClientRect();if(!r.width)return;const d=Math.min(2,devicePixelRatio||1);c.width=r.width*d;c.height=r.height*d;g.setTransform(d,0,0,d,0,0);
-    const w=r.width,h=r.height,gr=g.createLinearGradient(0,0,w,h);
-    gr.addColorStop(0,'#c9a050');gr.addColorStop(.3,'#f7e2a6');gr.addColorStop(.55,'#d8b062');gr.addColorStop(.75,'#fbeec4');gr.addColorStop(1,'#cfa452');
-    g.fillStyle=gr;g.fillRect(0,0,w,h);
-    // soft blue cloud in the foil
-    const blobs=[[.35,.45,.32],[.62,.38,.28],[.5,.62,.3],[.72,.6,.22]];
-    for(const [bx,by,br] of blobs){const rg=g.createRadialGradient(bx*w,by*h,0,bx*w,by*h,br*w);rg.addColorStop(0,'#7e93f0ee');rg.addColorStop(.6,'#6a80e6aa');rg.addColorStop(1,'#6a80e600');g.fillStyle=rg;g.beginPath();g.arc(bx*w,by*h,br*w,0,7);g.fill()}
-    for(let i=0;i<220;i++){g.fillStyle=Math.random()<.5?'#ffffff26':'#6b4a1218';g.fillRect(Math.random()*w,Math.random()*h,1.2,1.2)}
-    ready=true}
-  requestAnimationFrame(paint);addEventListener('resize',()=>{if(!card.classList.contains('done'))paint()});
-  function pos(e){const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
-  function scratch(p){g.globalCompositeOperation='destination-out';g.lineCap='round';g.lineJoin='round';g.lineWidth=30;g.beginPath();g.moveTo((lastP||p).x,(lastP||p).y);g.lineTo(p.x,p.y);g.stroke();g.beginPath();g.arc(p.x,p.y,15,0,7);g.fill();g.globalCompositeOperation='source-over';lastP=p;if(++checks%6===0)check()}
-  function check(){if(card.classList.contains('done'))return;const d=g.getImageData(0,0,c.width,c.height).data;let clear=0,n=0;for(let i=3;i<d.length;i+=64){n++;if(d[i]<40)clear++}if(clear/n>.45)finish()}
-  function finish(){if(card.classList.contains('done'))return;card.classList.add('done');const r=card.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,26);
-    if(++doneCount===3){row.parentElement.classList.add('all-done');setTimeout(()=>{const rr=row.getBoundingClientRect();burst(rr.left+rr.width/2,rr.top,90)},250)}}
-  c.addEventListener('pointerdown',e=>{if(!ready)return;down=true;lastP=null;c.setPointerCapture(e.pointerId);scratch(pos(e));e.preventDefault()});
-  c.addEventListener('pointermove',e=>{if(down)scratch(pos(e))});
-  ['pointerup','pointercancel','pointerleave'].forEach(t=>c.addEventListener(t,()=>{down=false;lastP=null;check()}));
-});
+/* ---------------- palace doors that open to reveal the date ---------------- */
+const doors=$('#doors');let opened=0;
+$$('.portal').forEach(pt=>pt.addEventListener('click',()=>{
+  if(pt.classList.contains('open'))return;pt.classList.add('open');
+  const r=pt.getBoundingClientRect();setTimeout(()=>burst(r.left+r.width/2,r.top+r.height*.45,30),350);
+  if(++opened===3){doors.parentElement.classList.add('all-done');setTimeout(()=>{const rr=doors.getBoundingClientRect();burst(rr.left+rr.width/2,rr.top,90)},700)}
+}));
 
 /* ---------------- countdown ---------------- */
 const EVENTS=[['the Bhaat, on Saturday, 5 December','2026-12-05T16:00:00+05:30'],['the Haldi, on Wednesday, 9 December','2026-12-09T12:00:00+05:30'],['the Wedding, on Thursday, 10 December','2026-12-10T20:00:00+05:30']];

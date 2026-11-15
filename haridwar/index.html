@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@500;600;700&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
-<link rel="stylesheet" href="style.css?v=16">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body class="locked">
 
@@ -168,11 +168,16 @@
       <div class="win"><div class="glass"><b id="cd-s">00</b></div><span>Seconds</span></div>
     </div>
     <p class="until reveal" id="until">until the Wedding, on Thursday, 10 December</p>
-    <div class="journey reveal" id="journey">
-      <div class="thread"><i class="fill" id="jfill"></i><i class="spark"></i></div>
-      <div class="stop" data-t="2026-12-05T16:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Bhaat &amp; Sangeet</b><span>5 Dec</span></div>
-      <div class="stop" data-t="2026-12-09T12:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Haldi</b><span>9 Dec</span></div>
-      <div class="stop" data-t="2026-12-10T20:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Wedding</b><span>10 Dec</span></div>
+    <div class="ganga reveal" id="ganga" aria-label="Bhaat and Sangeet on 5 December, Haldi on 9 December, Wedding on 10 December">
+      <div class="float f1"><p class="ename">Bhaat &amp; Sangeet</p><p class="edate">5 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <div class="float f2"><p class="ename">Haldi</p><p class="edate">9 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <div class="float f3"><p class="ename">Wedding</p><p class="edate">10 Dec</p><div class="boat"><img src="diya-lit.png" alt=""><img class="refl" src="diya-lit.png" alt=""><i class="rip"></i><i class="rip r2"></i></div></div>
+      <svg class="water" viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true">
+        <g class="wv w1"><path d="M0 14 Q25 9 50 14 T100 14 Q125 9 150 14 T200 14 Q225 9 250 14 T300 14 Q325 9 350 14 T400 14 Q425 9 450 14 T500 14 Q525 9 550 14 T600 14 Q625 9 650 14 T700 14 Q725 9 750 14 T800 14"/></g>
+        <g class="wv w2"><path d="M0 32 Q25 26 50 32 T100 32 Q125 26 150 32 T200 32 Q225 26 250 32 T300 32 Q325 26 350 32 T400 32 Q425 26 450 32 T500 32 Q525 26 550 32 T600 32 Q625 26 650 32 T700 32 Q725 26 750 32 T800 32"/></g>
+        <g class="wv w3"><path d="M0 50 Q25 46 50 50 T100 50 Q125 46 150 50 T200 50 Q225 46 250 50 T300 50 Q325 46 350 50 T400 50 Q425 46 450 50 T500 50 Q525 46 550 50 T600 50 Q625 46 650 50 T700 50 Q725 46 750 50 T800 50"/></g>
+      </svg>
+      <div class="petals-drift" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
   </section>
 
@@ -199,6 +204,6 @@
 </main>
 
 <canvas id="sparkle"></canvas>
-<script src="app.js?v=14"></script>
+<script src="app.js?v=15"></script>
 </body>
 </html>

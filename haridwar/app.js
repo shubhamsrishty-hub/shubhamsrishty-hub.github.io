@@ -98,11 +98,7 @@ function cd(){const now=Date.now();const ev=EVENTS.find(e=>new Date(e[1]).getTim
   else{const s=Math.floor((new Date(ev[1]).getTime()-now)/1000);
     setVal('d',pad(Math.floor(s/86400)));setVal('h',pad(Math.floor(s%86400/3600)));setVal('m',pad(Math.floor(s%3600/60)));setVal('s',pad(s%60));
     $('#until').textContent='until '+ev[0]}
-  // journey: passed stops lit, next stop pulsing
-  const stops=$$('.stop');let next=-1;
-  stops.forEach((st,i)=>{const t=new Date(st.dataset.t).getTime();st.classList.toggle('done',t<=now);if(next<0&&t>now)next=i});
-  stops.forEach((st,i)=>st.classList.toggle('next',i===next));
-  const frac=next<0?1:next/(stops.length-1);$('#jfill').style.width=(frac*100)+'%';}
+}
 cd();setInterval(cd,1000);
 
 /* ---------------- add to calendar ---------------- */

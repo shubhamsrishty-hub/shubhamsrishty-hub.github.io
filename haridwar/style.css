@@ -281,10 +281,10 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 .rip{position:absolute;left:50%;top:70px;width:70px;height:12px;margin-left:-35px;border:1px solid #fde3ae88;border-radius:50%;opacity:0;animation:ripple 3.2s ease-out infinite}
 .rip.r2{animation-delay:1.6s}
 @keyframes ripple{0%{transform:scale(.4);opacity:.8}100%{transform:scale(1.6);opacity:0}}
-.petals-drift i{position:absolute;top:168px;width:9px;height:6px;border-radius:60% 40% 60% 40%;background:#ff9f1c;opacity:.85;animation:drift 14s linear infinite}
+.petals-drift i{position:absolute;top:168px;width:9px;height:6px;border-radius:60% 40% 60% 40%;background:#ff9f1c;opacity:.85;animation:petalDrift 14s linear infinite}
 .petals-drift i:nth-child(2n){background:#ffd23f;top:190px;animation-duration:18s}
 .petals-drift i:nth-child(3n){background:#e63946;top:206px;animation-duration:22s}
 .petals-drift i:nth-child(1){animation-delay:-2s}.petals-drift i:nth-child(2){animation-delay:-7s}.petals-drift i:nth-child(3){animation-delay:-11s}
 .petals-drift i:nth-child(4){animation-delay:-4s}.petals-drift i:nth-child(5){animation-delay:-15s}.petals-drift i:nth-child(6){animation-delay:-9s}
-@keyframes drift{from{left:-5%;transform:rotate(0)}to{left:105%;transform:rotate(540deg)}}
+@keyframes petalDrift{from{left:-5%;transform:rotate(0)}to{left:105%;transform:rotate(540deg)}}
 @media (max-width:370px){.ename{font-size:21px}}

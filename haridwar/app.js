@@ -24,6 +24,7 @@ function welcome(){hero.classList.add('welcomed');document.body.classList.remove
 function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit')}
 function light(){
   if(lit)return;lit=true;hero.classList.add('lighting');
+  if(location.hash)history.replaceState(null,'',location.pathname);window.scrollTo(0,0);
   if(wanted)play();topbar.classList.add('show');
   if(reduce){hero.classList.add('lit');welcome();return}
   vLight.currentTime=0;
@@ -31,7 +32,7 @@ function light(){
 }
 vLight.addEventListener('ended',toLoop);
 vLight.addEventListener('timeupdate',()=>{if(vLight.duration&&vLight.currentTime>vLight.duration-.12)toLoop()});
-hero.addEventListener('click',()=>{if(!lit)light()});
+hero.addEventListener('click',e=>{if(!lit){e.preventDefault();light()}});
 $('#close-again').addEventListener('click',()=>{
   lit=false;hero.classList.remove('lit','welcomed','lighting');vLoop.pause();vLight.pause();vLight.currentTime=0;
   topbar.classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});

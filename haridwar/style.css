@@ -58,7 +58,8 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 @keyframes glow{50%{opacity:.55;text-shadow:0 0 4px #ffcf7a,0 2px 8px #000}}
 .scroll-hint{position:absolute;left:50%;bottom:6%;z-index:2;transform:translateX(-50%);font-family:'Great Vibes',cursive;font-size:24px;color:var(--ivory);text-decoration:none;opacity:0;transition:opacity 1s;text-shadow:0 2px 10px #000}
 .scroll-hint span{display:block;width:10px;height:10px;margin:2px auto 0;border-right:1.5px solid var(--ivory);border-bottom:1.5px solid var(--ivory);transform:rotate(45deg);animation:bob 1.6s ease-in-out infinite}
-.welcomed .scroll-hint{opacity:1}
+.scroll-hint{pointer-events:none}
+.welcomed .scroll-hint{opacity:1;pointer-events:auto}
 @keyframes bob{50%{transform:translateY(6px) rotate(45deg)}}
 
 /* ---------- sections ---------- */

@@ -7,6 +7,8 @@ const hero=$('#hero'),vLight=$('#v-light'),vLoop=$('#v-loop'),topbar=$('#topbar'
 function probe(src,ok){const i=new Image();i.onload=()=>ok(i);i.src=src+'?v=1'}
 probe('paper.jpg',()=>document.body.classList.add('has-paper'));
 probe('ornament.png',()=>document.body.classList.add('has-orn'));
+probe('venue-map.jpg',()=>$('#venue-art').classList.add('has'));
+probe('closing.jpg',()=>{const c=$('.closing-bg');c.src='closing.jpg?v=1'});
 
 /* ---------------- music ---------------- */
 const music=$('#music'),audio=new Audio('wedding-music.mp3');audio.loop=true;audio.preload='auto';audio.volume=0;

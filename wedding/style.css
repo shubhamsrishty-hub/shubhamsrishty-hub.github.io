@@ -373,6 +373,10 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 .topbar .pill{transition:opacity .35s ease,transform .35s ease}
 .topbar.tucked .pill{opacity:0;transform:translateY(-160%);pointer-events:none}
 
+/* the three countdown diya names sit on one line, matching each other */
+.ename{font-size:min(22px,5.3vw);white-space:nowrap;min-height:34px;letter-spacing:-.2px}
+@media (max-width:370px){.ename{font-size:min(20px,5.3vw)}}
+
 /* ================= touch points that open the royal invitation ================= */
 .peek{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 13px;border-radius:30px;border:1px solid #f0c27a;background:#f0c27a1a;color:var(--gold-l);
   font:600 11px/1 'Cormorant SC',serif;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;animation:peekGlow 2.8s ease-in-out infinite}

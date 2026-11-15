@@ -7,7 +7,7 @@ const hero=$('#hero'),vLight=$('#v-light'),vLoop=$('#v-loop'),topbar=$('#topbar'
 function probe(src,ok){const i=new Image();i.onload=()=>ok(i);i.src=src+'?v=1'}
 probe('paper.jpg',()=>document.body.classList.add('has-paper'));
 probe('ornament.png',()=>document.body.classList.add('has-orn'));
-probe('venue-map.jpg',()=>$('#venue-art').classList.add('has'));
+probe('venue-map.jpg',()=>($('#venue-art')||document.body).classList.add('has'));
 
 
 /* ---------------- music ---------------- */

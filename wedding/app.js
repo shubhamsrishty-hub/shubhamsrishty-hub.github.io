@@ -210,7 +210,7 @@ cd();setInterval(cd,1000);
 
 /* ---------------- add to calendar ---------------- */
 const EV={
-  bhaat:{t:'Bhaat & Sangeet · Srishty & Shubham',s:'20261205T160000',e:'20261205T230000',loc:'Drive Inn 24, Shahnai Hall',d:'Bhaat 4:00 PM onwards, followed by Sangeet & Dinner at 8:00 PM.'},
+  bhaat:{t:'Bhaat & Sangeet · Srishty & Shubham',s:'20261205T200000',e:'20261205T233000',loc:'Drive Inn 24, Shahnai Hall',d:'Dinner & Sangeet at 8:00 PM.'},
   haldi:{t:'Haldi · Srishty & Shubham',s:'20261209T120000',e:'20261209T150000',loc:'Hotel Grand Village',d:'Haldi ceremony at 12:00 noon.'},
   wedding:{t:'Wedding · Srishty & Shubham',s:'20261210T200000',e:'20261211T020000',loc:'Hotel Hyatt Place, NH-58, Near Toll Plaza, Bahadarabad, Haridwar',d:'Wedding & Dinner, 8:00 PM onwards.'}
 };

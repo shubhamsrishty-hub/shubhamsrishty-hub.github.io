@@ -89,7 +89,7 @@ $$('.portal').forEach(pt=>pt.addEventListener('click',()=>{
 }));
 
 /* ---------------- countdown in palace windows ---------------- */
-const EVENTS=[['the Bhaat, on Saturday, 5 December','2026-12-05T16:00:00+05:30'],['the Haldi, on Wednesday, 9 December','2026-12-09T12:00:00+05:30'],['the Wedding, on Thursday, 10 December','2026-12-10T20:00:00+05:30']];
+const EVENTS=[['the Wedding, on Thursday, 10 December','2026-12-10T20:00:00+05:30']];
 const pad=n=>String(n).padStart(2,'0');
 function setVal(id,v){const el=$('#cd-'+id);if(el.textContent===v)return;el.textContent=v;el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick')}
 function cd(){const now=Date.now();const ev=EVENTS.find(e=>new Date(e[1]).getTime()>now);

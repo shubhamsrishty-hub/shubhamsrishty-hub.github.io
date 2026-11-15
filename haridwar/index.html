@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@500;600;700&family=Cormorant+SC:wght@500;600;700&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=14">
 </head>
 <body class="locked">
 
@@ -151,14 +151,19 @@
   <section class="sec countdown" id="countdown">
     <h2 class="script title reveal">The celebration begins</h2>
     <div class="orn reveal"></div>
-    <div class="cd reveal">
-      <div><b id="cd-d">00</b><span>Days</span></div><em>:</em>
-      <div><b id="cd-h">00</b><span>Hours</span></div><em>:</em>
-      <div><b id="cd-m">00</b><span>Minutes</span></div><em>:</em>
-      <div><b id="cd-s">00</b><span>Seconds</span></div>
+    <div class="cd reveal" id="cd">
+      <div class="win"><div class="glass"><b id="cd-d">00</b></div><span>Days</span></div>
+      <div class="win"><div class="glass"><b id="cd-h">00</b></div><span>Hours</span></div>
+      <div class="win"><div class="glass"><b id="cd-m">00</b></div><span>Minutes</span></div>
+      <div class="win"><div class="glass"><b id="cd-s">00</b></div><span>Seconds</span></div>
     </div>
     <p class="until reveal" id="until">until the Bhaat, on Saturday, 5 December</p>
-    <div class="diyas" id="diyas" aria-hidden="true"></div>
+    <div class="journey reveal" id="journey">
+      <div class="thread"><i class="fill" id="jfill"></i><i class="spark"></i></div>
+      <div class="stop" data-t="2026-12-05T16:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Bhaat &amp; Sangeet</b><span>5 Dec</span></div>
+      <div class="stop" data-t="2026-12-09T12:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Haldi</b><span>9 Dec</span></div>
+      <div class="stop" data-t="2026-12-10T20:00:00+05:30"><img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt=""><b>Wedding</b><span>10 Dec</span></div>
+    </div>
   </section>
 
   <!-- ============ LOCATION ============ -->
@@ -184,6 +189,6 @@
 </main>
 
 <canvas id="sparkle"></canvas>
-<script src="app.js?v=11"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>

@@ -22,9 +22,9 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!audio.
 
 /* ---------------- welcome text: written word by word ---------------- */
 (()=>{let i=0;document.querySelectorAll('.hero-text.after > *').forEach(el=>{
-  if(el.classList.contains('orn')){el.style.setProperty('--d',(i*0.17)+'s');i+=2;return}
+  if(el.classList.contains('orn')){el.style.setProperty('--d',(.35+i*0.17)+'s');i+=2;return}
   const words=el.textContent.trim().split(/\s+/);el.textContent='';
-  words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(i*0.17)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '));i++;});
+  words.forEach((w,k)=>{const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.setProperty('--d',(.35+i*0.17)+'s');el.appendChild(sp);if(k<words.length-1)el.appendChild(document.createTextNode(' '));i++;});
 });})();
 
 /* ---------------- light the diyas ---------------- */
@@ -40,11 +40,11 @@ document.addEventListener('wheel',e=>{if(isLocked())e.preventDefault()},{passive
 // preload only — never start the lighting until the guest taps
 vLight.removeAttribute('autoplay');vLight.pause();vLight.load();
 vLight.addEventListener('play',()=>{if(!lit){vLight.pause();try{vLight.currentTime=0}catch(e){}}});
-function welcome(){if(welcomed)return;welcomed=true;hero.classList.add('welcomed');document.body.classList.remove('locked')}
+function welcome(){if(welcomed)return;welcomed=true;document.body.classList.remove('locked')}
 function toLoop(){if(hero.classList.contains('lit'))return;vLoop.currentTime=0;vLoop.play().catch(()=>{});hero.classList.add('lit');welcome()}
 function light(){
   if(lit)return;lit=true;
-  tapHint.style.display='none';hero.classList.add('lighting');
+  tapHint.style.display='none';hero.classList.add('lighting');requestAnimationFrame(()=>hero.classList.add('welcomed'));
   window.scrollTo(0,0);
   if(wanted)play();topbar.classList.add('show');
   if(reduce){toLoop();return}
@@ -53,7 +53,7 @@ function light(){
   setTimeout(()=>{if(!welcomed)toLoop()},14000); // safety net on very slow connections
 }
 // the welcome text follows the video itself, not a clock, so it never runs ahead of the lighting
-vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(3.6,d-.5))welcome();if(t>d-.15)toLoop()});
+vLight.addEventListener('timeupdate',()=>{if(!lit)return;const t=vLight.currentTime,d=vLight.duration||10;if(t>=Math.min(3,d-.5))welcome();if(t>d-.15)toLoop()});
 vLight.addEventListener('ended',()=>{if(lit)toLoop()});
 hero.addEventListener('click',e=>{if(!lit){e.preventDefault();light()}});
 $('#close-again').addEventListener('click',()=>{
@@ -88,22 +88,21 @@ $$('.portal').forEach(pt=>pt.addEventListener('click',()=>{
   if(++opened===3){doors.parentElement.classList.add('all-done');setTimeout(()=>{const rr=doors.getBoundingClientRect();burst(rr.left+rr.width/2,rr.top,90)},700)}
 }));
 
-/* ---------------- countdown ---------------- */
+/* ---------------- countdown in palace windows ---------------- */
 const EVENTS=[['the Bhaat, on Saturday, 5 December','2026-12-05T16:00:00+05:30'],['the Haldi, on Wednesday, 9 December','2026-12-09T12:00:00+05:30'],['the Wedding, on Thursday, 10 December','2026-12-10T20:00:00+05:30']];
 const pad=n=>String(n).padStart(2,'0');
-function cd(){const now=Date.now();let ev=EVENTS.find(e=>new Date(e[1]).getTime()>now);
-  if(!ev){$('#until').textContent='Thank you for celebrating with us';['d','h','m','s'].forEach(k=>$('#cd-'+k).textContent='00');return}
-  let s=Math.floor((new Date(ev[1]).getTime()-now)/1000);
-  $('#cd-d').textContent=pad(Math.floor(s/86400));$('#cd-h').textContent=pad(Math.floor(s%86400/3600));$('#cd-m').textContent=pad(Math.floor(s%3600/60));$('#cd-s').textContent=pad(s%60);
-  $('#until').textContent='until '+ev[0]}
+function setVal(id,v){const el=$('#cd-'+id);if(el.textContent===v)return;el.textContent=v;el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick')}
+function cd(){const now=Date.now();const ev=EVENTS.find(e=>new Date(e[1]).getTime()>now);
+  if(!ev){$('#until').textContent='Thank you for celebrating with us';['d','h','m','s'].forEach(k=>setVal(k,'00'))}
+  else{const s=Math.floor((new Date(ev[1]).getTime()-now)/1000);
+    setVal('d',pad(Math.floor(s/86400)));setVal('h',pad(Math.floor(s%86400/3600)));setVal('m',pad(Math.floor(s%3600/60)));setVal('s',pad(s%60));
+    $('#until').textContent='until '+ev[0]}
+  // journey: passed stops lit, next stop pulsing
+  const stops=$$('.stop');let next=-1;
+  stops.forEach((st,i)=>{const t=new Date(st.dataset.t).getTime();st.classList.toggle('done',t<=now);if(next<0&&t>now)next=i});
+  stops.forEach((st,i)=>st.classList.toggle('next',i===next));
+  const frac=next<0?1:next/(stops.length-1);$('#jfill').style.width=(frac*100)+'%';}
 cd();setInterval(cd,1000);
-
-/* ---------------- row of diyas lighting one by one ---------------- */
-const diyas=$('#diyas');
-probe('diya-unlit.png',()=>probe('diya-lit.png',()=>{
-  for(let i=0;i<11;i++){const d=document.createElement('i');d.innerHTML='<img class="off" src="diya-unlit.png" alt=""><img class="on" src="diya-lit.png" alt="">';diyas.appendChild(d)}
-  new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();[...diyas.children].forEach((d,i)=>setTimeout(()=>d.classList.add('lit'),reduce?0:300+i*220))}),{threshold:.6}).observe(diyas);
-}));
 
 /* ---------------- add to calendar ---------------- */
 const EV={

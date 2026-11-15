@@ -8,7 +8,7 @@ function probe(src,ok){const i=new Image();i.onload=()=>ok(i);i.src=src+'?v=1'}
 probe('paper.jpg',()=>document.body.classList.add('has-paper'));
 probe('ornament.png',()=>document.body.classList.add('has-orn'));
 probe('venue-map.jpg',()=>$('#venue-art').classList.add('has'));
-probe('closing.jpg',()=>{const c=$('.closing-bg');c.src='closing.jpg?v=1'});
+
 
 /* ---------------- music ---------------- */
 const music=$('#music'),audio=new Audio('wedding-music.mp3');audio.loop=true;audio.preload='auto';audio.volume=0;
@@ -60,6 +60,9 @@ $('#close-again').addEventListener('click',()=>{
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
 $$('.reveal').forEach(n=>io.observe(n));
 new IntersectionObserver(es=>es.forEach(e=>{if(!lit)return;e.isIntersecting?(hero.classList.contains('lit')&&vLoop.play().catch(()=>{})):vLoop.pause()}),{threshold:.05}).observe(hero);
+
+const cvid=$('#closing-video');
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cvid.preload='auto';cvid.play().catch(()=>{})}else cvid.pause()}),{threshold:.1}).observe(cvid);
 
 /* ---------------- sparkles ---------------- */
 const cv=$('#sparkle'),cx=cv.getContext('2d');let parts=[],running=false,last=performance.now();

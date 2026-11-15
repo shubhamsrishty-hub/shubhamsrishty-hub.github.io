@@ -145,10 +145,10 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 .link{display:inline-block;margin-top:16px;font:italic 600 18px 'Cormorant Garamond',serif;color:var(--ivory);border-bottom:1px solid var(--ivory);text-decoration:none}
 
 /* closing */
-.closing{position:relative;min-height:600px;display:flex;align-items:flex-start;justify-content:center;text-align:center;overflow:hidden}
+.closing{position:relative;min-height:760px;display:flex;align-items:flex-start;justify-content:center;text-align:center;overflow:hidden}
 .closing-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
-.closing::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(#1f36a6 0%,#1f36a6cc 14%,#0b164033 52%,#060c2acc 100%)}
-.closing-text{position:relative;z-index:2;padding:36px 22px 0;text-shadow:0 2px 12px #000a}
+.closing::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(#1f36a6 0%,#1f36a6aa 10%,#0b164022 40%,transparent 70%,#060c2a88 100%)}
+.closing-text{position:relative;z-index:2;padding:64px 22px 0;text-shadow:0 2px 12px #000a}
 .closing .names{font-size:52px;margin:14px 0 6px}
 
 /* reveal */
@@ -160,10 +160,11 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 @media (max-width:370px){.title{font-size:44px}.card .who{font-size:38px}.scratch{width:88px;height:96px}.txt .t{font-size:34px}.cd b{font-size:38px;min-width:52px}}
 
 /* location: illustrated map (shown once venue-map.jpg is added) + gold button */
-.venue-art{display:none;position:relative;width:88%;margin:4px auto 0;border-radius:200px 200px 14px 14px;overflow:hidden;box-shadow:0 0 0 1px #f0c27a88,0 0 0 7px #1f36a6,0 0 0 8px #f0c27a55,0 14px 34px #0008}
+.venue-art{display:none;position:relative;width:92%;margin:4px auto 0;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px #f0c27a88,0 0 0 7px #1f36a6,0 0 0 8px #f0c27a55,0 14px 34px #0008}
 .venue-art.has{display:block}
 .venue-art img{display:block;width:100%;animation:drift 18s ease-in-out infinite alternate}
-@keyframes drift{from{transform:scale(1.04) translate(-1%,0)}to{transform:scale(1.1) translate(1%,-1.5%)}}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.05)}}
+.venue-art img{transform-origin:76% 58%}
 .venue-art .pin{position:absolute;left:var(--px,50%);top:var(--py,50%);width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#ffd36a;box-shadow:0 0 0 0 #ffd36aaa;animation:ping 2s ease-out infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 #ffd36acc}100%{box-shadow:0 0 0 26px #ffd36a00}}
 .go{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:14px 26px;border-radius:40px;text-decoration:none;font:600 15px 'Cormorant SC',serif;letter-spacing:.18em;color:#2a1405;background:linear-gradient(#ffeab0,#d9a548);box-shadow:0 0 0 1px #fff3cf66 inset,0 8px 24px #0007;animation:gpulse 2.4s ease-in-out infinite}

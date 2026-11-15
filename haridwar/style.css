@@ -232,3 +232,37 @@ body.has-orn .orn::before,body.has-orn .orn::after{display:none}
 .stop b{display:block;margin-top:62px;font:700 15px/1.2 'Cormorant Garamond',serif}
 .stop span{display:block;font:600 11px 'Cormorant SC',serif;letter-spacing:.22em;color:#dfe4ff;margin-top:2px}
 @media (max-width:370px){.glass{width:62px;height:84px}.glass b{font-size:26px}.cd{gap:9px}}
+
+/* ---------- golden mandala medallion ---------- */
+.medallion{position:relative;width:250px;height:250px;margin:6px auto 0}
+.medallion svg{position:relative;width:100%;height:100%;overflow:visible}
+.m-glow{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,#ffd98a66,#ffd98a00 70%);animation:mglow 3.4s ease-in-out infinite}
+@keyframes mglow{50%{transform:scale(1.25);opacity:.6}}
+.medallion .ln{fill:none;stroke:url(#gold);stroke-width:1.4;stroke-dasharray:710;stroke-dashoffset:710;transition:stroke-dashoffset 2s ease}
+.medallion .ln.thin{stroke-width:1;stroke-dasharray:360;stroke-dashoffset:360;transition-delay:.4s}
+.medallion.in .ln{stroke-dashoffset:0}
+.medallion .pt{fill:none;stroke:url(#gold);stroke-width:1.2;opacity:0;transform-box:view-box}
+.medallion.in .pt{animation:petal .8s ease forwards;animation-delay:calc(.6s + var(--i)*.07s)}
+@keyframes petal{from{opacity:0;stroke-dasharray:0 140}to{opacity:1;stroke-dasharray:140 0}}
+.medallion .petals{transform-origin:150px 150px;animation:spin 60s linear infinite}
+.medallion .bd{fill:#f6d58a;opacity:0}
+.medallion.in .bd{animation:bead .4s ease forwards,twinkle 2.4s ease-in-out infinite;animation-delay:calc(1.6s + var(--i)*.04s),calc(2.8s + var(--i)*.15s)}
+@keyframes bead{to{opacity:1}}
+@keyframes twinkle{50%{opacity:.25}}
+.medallion .spin-rev{transform-origin:150px 150px;animation:spin 90s linear infinite reverse}
+.medallion .spin-slow{transform-origin:150px 150px;animation:spin 70s linear infinite;opacity:0;transition:opacity 1.2s 1.8s}
+.medallion.in .spin-slow{opacity:1}
+.ring-txt{font:600 11.5px 'Cormorant SC',serif;letter-spacing:3.4px;fill:#fbe7b5}
+@keyframes spin{to{transform:rotate(360deg)}}
+.medallion .core{fill:#1a2a8c;stroke:#f0c27a55;stroke-width:1;opacity:.85}
+.medallion .mono{text-anchor:middle;font-family:'Great Vibes',cursive;fill:url(#gold2);opacity:0;transform-origin:150px 150px;transform:scale(.6)}
+.medallion .mono .s1,.medallion .mono .s2{font-size:56px}
+.medallion .mono .amp{font-size:26px}
+.medallion.in .mono{animation:monoIn 1.2s 1.2s cubic-bezier(.2,1.3,.4,1) forwards}
+@keyframes monoIn{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.medallion *{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}}
+.medallion .pt2{fill:#f0c27a2e;stroke:#f6d58aaa;stroke-width:.8;opacity:0}
+.medallion.in .pt2{animation:bead .6s ease forwards;animation-delay:calc(1.4s + var(--i)*.05s)}
+.medallion .tip{fill:#fbe7b5;opacity:0}
+.medallion.in .tip{animation:bead .4s 2s ease forwards}
+.ring-txt{font-size:11px;letter-spacing:1px}

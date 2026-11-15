@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1640">
+<title>Srishty & Shubham · A Wedding in Haridwar</title>
+<meta name="description" content="Srishty weds Shubham · 10 December 2026 · Haridwar">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="preload" href="hero-light.mp4" as="video" type="video/mp4">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body class="locked">
+<main class="invite">
+
+  <!-- ============ HERO: tap to light the diyas ============ -->
+  <section class="hero" id="hero">
+    <video class="hero-video v-light" id="v-light" src="hero-light.mp4" poster="hero-unlit.jpg" muted playsinline webkit-playsinline preload="auto"></video>
+    <video class="hero-video v-loop" id="v-loop" src="hero-loop.mp4" poster="hero-lit.jpg" muted playsinline webkit-playsinline loop preload="auto"></video>
+    <div class="hero-shade"></div>
+
+    <div class="hero-text before">
+      <p class="hindi">॥ श्री गणेशाय नमः ॥</p>
+      <p class="script big">You're invited</p>
+      <p class="caps">to a wedding in Haridwar</p>
+    </div>
+
+    <div class="hero-text after">
+      <p class="caps small">Welcome to the wedding of</p>
+      <p class="script names">Srishty</p>
+      <p class="script amp">&amp;</p>
+      <p class="script names">Shubham</p>
+      <span class="rule"><i></i>✦<i></i></span>
+      <p class="caps">10 December 2026</p>
+      <p class="caps small">Haridwar</p>
+    </div>
+
+    <button class="light-btn" id="light-btn" aria-label="Tap to light the diyas">
+      <span class="flame"></span>Tap to light the diyas
+    </button>
+    <a class="scroll-hint" href="#date">Scroll down<span></span></a>
+  </section>
+
+  <!-- ============ THE DATE ============ -->
+  <section class="date" id="date">
+    <div class="ghat-band">
+      <video class="ghat-video" src="ghat-fireworks.mp4" poster="ghat-fireworks.jpg" muted playsinline webkit-playsinline loop preload="metadata"></video>
+    </div>
+    <div class="panel">
+      <h2 class="script title reveal">The Date</h2>
+      <span class="rule reveal"><i></i>✦<i></i></span>
+      <p class="hint reveal">✦ Scratch to reveal the date ✦</p>
+      <div class="scratch-row reveal" id="scratch-row">
+        <div class="scratch"><div class="under"><b>10</b><span>Date</span></div><canvas></canvas></div>
+        <div class="scratch"><div class="under"><b class="word">December</b><span>Month</span></div><canvas></canvas></div>
+        <div class="scratch"><div class="under"><b>2026</b><span>Year</span></div><canvas></canvas></div>
+      </div>
+      <p class="day-line" id="day-line">Thursday · Save the date</p>
+    </div>
+  </section>
+
+  <!-- ============ THE INVITATION ============ -->
+  <section class="invitation panel" id="invitation">
+    <div class="painting reveal"><img src="shiva-parvati.jpg" alt="Shiva and Parvati blessing the divine wedding" loading="lazy"></div>
+    <p class="hindi reveal">॥ ॐ नमः शिवाय ॥</p>
+    <div class="monogram reveal"><span>S</span><i>&amp;</i><span>S</span></div>
+    <p class="lead reveal">With the blessings of our elders,<br>you are warmly invited to the wedding of</p>
+
+    <div class="person reveal">
+      <p class="script who">Srishty Chaudhary</p>
+      <p class="caps tiny">Daughter of</p>
+      <p class="parents">Smt. Anju Singh<br>&amp; Shri Surendra Singh Chahal</p>
+    </div>
+    <p class="script with reveal">with</p>
+    <div class="person reveal">
+      <p class="caps tiny rank">Major</p>
+      <p class="script who">Shubham Singh Tomer</p>
+      <p class="caps tiny">Son of</p>
+      <p class="parents">Smt. Rupa Tomer<br>&amp; Shri Jagpal Tomer</p>
+    </div>
+    <span class="rule reveal"><i></i>✦<i></i></span>
+    <p class="when reveal">Thursday, 10 December 2026</p>
+    <p class="where reveal">Hotel Hyatt Place · Bahadarabad, Haridwar</p>
+  </section>
+
+  <!-- ============ THE CELEBRATIONS ============ -->
+  <section class="celebrations panel" id="celebrations">
+    <h2 class="script title reveal">The Celebrations</h2>
+    <span class="rule reveal"><i></i>✦<i></i></span>
+
+    <ol class="timeline">
+      <li class="event reveal">
+        <img class="icon" src="icon-sangeet.png" alt="" loading="lazy">
+        <p class="eday">Sat · 5 Dec</p>
+        <h3>Bhaat &amp; Sangeet</h3>
+        <p class="hi">भात · संगीत</p>
+        <p class="etime"><b>Bhaat</b> · 4:00 PM onwards</p>
+        <p class="etime"><b>Sangeet &amp; Dinner</b> · 8:00 PM</p>
+        <p class="evenue">Drive Inn 24, Shahnai Hall</p>
+        <button class="cal" data-ev="bhaat">＋ Add to calendar</button>
+      </li>
+      <li class="event reveal">
+        <img class="icon" src="icon-haldi.png" alt="" loading="lazy">
+        <p class="eday">Wed · 9 Dec</p>
+        <h3>Haldi</h3>
+        <p class="hi">हल्दी</p>
+        <p class="etime"><b>12:00 Noon</b></p>
+        <p class="evenue">Hotel Grand Village</p>
+        <button class="cal" data-ev="haldi">＋ Add to calendar</button>
+      </li>
+      <li class="event reveal">
+        <img class="icon" src="icon-wedding.png" alt="" loading="lazy">
+        <p class="eday">Thu · 10 Dec</p>
+        <h3>Wedding &amp; Dinner</h3>
+        <p class="hi">शुभ विवाह</p>
+        <p class="etime"><b>8:00 PM</b> onwards</p>
+        <p class="evenue">Hotel Hyatt Place<br>NH-58, Near Toll Plaza, Bahadarabad, Haridwar</p>
+        <div class="btns">
+          <button class="cal" data-ev="wedding">＋ Add to calendar</button>
+          <a class="cal" href="https://www.google.com/maps/search/?api=1&query=Hyatt+Place+Haridwar+Bahadarabad" target="_blank" rel="noopener">Directions ↗</a>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing" id="closing">
+    <img class="closing-bg" src="hero-lit.jpg" alt="" loading="lazy">
+    <div class="closing-text">
+      <p class="hindi reveal">आपकी उपस्थिति ही हमारा आशीर्वाद है</p>
+      <p class="lead reveal">Your presence is our greatest blessing</p>
+      <p class="script names reveal">Srishty &amp; Shubham</p>
+      <p class="caps small reveal">10 · 12 · 2026 · Haridwar</p>
+      <button class="again reveal" id="again">↻ Light the diyas again</button>
+    </div>
+  </section>
+</main>
+
+<button class="music" id="music" aria-label="Pause music" aria-pressed="false"><span class="note">♪</span><span class="bars"><i></i><i></i><i></i></span></button>
+<canvas id="sparkle"></canvas>
+<script src="app.js?v=2"></script>
+</body>
+</html>

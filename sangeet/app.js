@@ -73,7 +73,15 @@ $$('.reveal').forEach(n=>io.observe(n));
 new IntersectionObserver(es=>es.forEach(e=>{if(!lit)return;e.isIntersecting?(hero.classList.contains('lit')&&vLoop.play().catch(()=>{})):vLoop.pause()}),{threshold:.05}).observe(hero);
 
 const cvid=$('#closing-video');
-new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cvid.preload='auto';cvid.play().catch(()=>{})}else cvid.pause()}),{threshold:.1}).observe(cvid);
+/* the closing aarti: fetched quietly as the guest nears the end, so it is ready when they arrive */
+(()=>{let blobbed=false,fetching=false;const cn=navigator.connection||{},thrifty=cn.saveData||/(^|-)2g$/.test(cn.effectiveType||'');
+  function grab(){if(thrifty||fetching||blobbed)return;fetching=true;
+    fetch('closing-aarti.mp4?v=1',{priority:'low'}).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{const t=cvid.currentTime,was=!cvid.paused;cvid.src=URL.createObjectURL(b);blobbed=true;try{cvid.currentTime=t}catch(e){}if(was)cvid.play().catch(()=>{})}).catch(()=>{fetching=false})}
+  const cd=document.getElementById('countdown')||cvid;new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();grab()}}),{rootMargin:'120% 0px'}).observe(cd);
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cvid.preload='auto';grab();cvid.play().catch(()=>{})}else cvid.pause()}),{threshold:.1}).observe(cvid);
+  // low-power mode can block autoplay: a touch on the closing scene starts it
+  const cs=document.getElementById('closing');cs&&cs.addEventListener('touchstart',()=>{if(cvid.paused)cvid.play().catch(()=>{})},{passive:true});
+})();
 
 /* ---------------- Shiva–Parvati arch: falling petals ---------------- */
 (()=>{const pf=$('#petal-fall');if(!pf||reduce)return;const cols=['#ff9f1c','#ffd23f','#f7a6b4','#fff3d6','#ff7b54'];

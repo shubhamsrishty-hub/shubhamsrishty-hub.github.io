@@ -9,7 +9,8 @@ let playing=false,started=false,v=null;window.__paused=true;
 if(key){
   v=document.createElement('video');v.className='card-video';
   v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('muted','');v.setAttribute('webkit-playsinline','');
-  v.poster=CLIPS[key]+'.jpg';v.preload='auto';v.loop=!ONCE[key];v.src=CLIPS[key]+'.mp4';
+  let pre=null;try{pre=parent.__clips&&parent.__clips[key]}catch(e){}
+  v.poster=CLIPS[key]+'.jpg';v.preload='auto';v.loop=!ONCE[key];v.src=pre||CLIPS[key]+'.mp4';
   v.addEventListener('loadedmetadata',()=>{card.classList.add('has-video');if(playing&&!reduce)v.play().catch(()=>{});},{once:true});
   v.addEventListener('error',()=>{card.classList.remove('has-video');v.remove();v=null;},{once:true});
   if(ONCE[key])v.addEventListener('ended',()=>{if(window.groomArrived)window.groomArrived();});
@@ -19,7 +20,8 @@ function restart(){if(!v)return;started=true;try{v.currentTime=0;}catch(e){}card
 window.sceneCtl={
   play(){playing=true;window.__paused=false;if(!v||reduce)return;if(ONCE[key]){if(!started||v.ended)restart();else v.play().catch(()=>{});}else v.play().catch(()=>{});},
   pause(){playing=false;window.__paused=true;if(v)v.pause();},
-  restart(){playing=true;window.__paused=false;restart();}
+  restart(){playing=true;window.__paused=false;restart();},
+  state(){return{ready:v?v.readyState:4,playing:!v||reduce||(!v.paused&&v.currentTime>.05)||v.ended}}
 };
 // iOS low-power mode can block autoplay: the first touch on the scene starts its clip
 document.addEventListener('touchstart',()=>{if(playing&&v&&v.paused&&!v.ended)v.play().catch(()=>{});},{passive:true});

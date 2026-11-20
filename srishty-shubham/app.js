@@ -116,7 +116,7 @@ $$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
     bhaat:['clip-page-bhaat','Touch the celebration to shower petals','Bhaat and Sangeet'],haldi:['clip-page-haldi','Touch the celebration to shower petals','Haldi'],
     dinner:['clip-page-3','Touch the groom, the sky or the elephants','Wedding dinner'],venue:['clip-page-4','Touch the couple or the lotus pools','The venue']};
   const W0=400,H0=710,card=$('#rv-card'),box=$('#rv-box'),hint=$('#rv-hint'),dots=$('#rv-dots'),gate=$('#gate');
-  let savedY=0,cur=0,frame=null,ready=false,origin=null,isOpen=false,pushed=false,busy=false,k=1,swiped=false;
+  let hint0='',watchT=null,savedY=0,cur=0,frame=null,ready=false,origin=null,isOpen=false,pushed=false,busy=false,k=1,swiped=false;
   frameFor(card,0,1.5,5.5);
   ORDER.forEach(()=>dots.appendChild(document.createElement('i')));
   const ctl=()=>{try{return frame&&ready&&frame.contentWindow.sceneCtl||null}catch(e){return null}};
@@ -124,15 +124,22 @@ $$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
     const w=Math.max(200,Math.min(vw-30,470,(vh-104)*476/845));k=w/W0;
     box.style.width=w+'px';box.style.height=(w*845/476)+'px';if(frame)frame.style.transform=`scale(${k})`;}
   size();addEventListener('resize',size);if(window.visualViewport)visualViewport.addEventListener('resize',size);
+  // while a page's clip is still arriving, a soft gold shimmer shows; if the phone refuses to autoplay
+  // (low-power mode, data saver) the hint asks for one tap, which starts it
+  function watch(){clearInterval(watchT);if(reduce)return;box.classList.add('loading');const t0=Date.now();
+    watchT=setInterval(()=>{const c=ctl(),st=c&&c.state&&c.state();
+      if(!isOpen||Date.now()-t0>25000){clearInterval(watchT);box.classList.remove('loading');return}
+      if(st&&st.playing){clearInterval(watchT);box.classList.remove('loading');hint.textContent=hint0;return}
+      if(st&&st.ready>=2&&Date.now()-t0>2600){box.classList.remove('loading');hint.textContent='✦ Tap the picture to bring it to life ✦'}},350)}
   function load(i,dir){cur=(i+ORDER.length)%ORDER.length;const key=ORDER[cur],[poster,h,title]=INFO[key];
     if(frame){frame.remove();frame=null}ready=false;box.classList.remove('ready');
-    box.style.backgroundImage=`url('scene/${poster}.jpg')`;hint.textContent='✦ '+h+' ✦';
+    box.style.backgroundImage=`url('scene/${poster}.jpg')`;hint.textContent='✦ '+h+' ✦';hint0=hint.textContent;
     [...dots.children].forEach((d,n)=>d.classList.toggle('on',n===cur));
     box.classList.remove('turn-l','turn-r');if(dir&&!reduce){void box.offsetWidth;box.classList.add(dir>0?'turn-l':'turn-r')}
     const f=document.createElement('iframe');f.title=title;f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay');f.setAttribute('tabindex','-1');
     f.style.transform=`scale(${k})`;f.src='scene/'+key+'.html?v=2';
     f.addEventListener('load',()=>{if(frame!==f)return;ready=true;box.classList.add('ready');const c=ctl();if(c&&isOpen)c.play()});
-    box.prepend(f);frame=f}
+    box.prepend(f);frame=f;watch()}
   function flip(opening){if(reduce||!origin||!card.animate)return null;
     card.getAnimations().forEach(a=>a.cancel());
     const r=origin.getBoundingClientRect(),c=card.getBoundingClientRect();if(!c.width||!r.width)return null;
@@ -174,6 +181,19 @@ $$('.framed.auto').forEach(el=>{frameFor(el,0,1.5,5.5);
   if(gate)gate.addEventListener('click',()=>{if(gate.classList.contains('open'))return;gate.classList.add('open');
     const r=gate.getBoundingClientRect();setTimeout(()=>burst(r.left+r.width/2,r.top+r.height*.45,60),450);
     setTimeout(()=>open('opening',$('#palace-box')),reduce?0:1150)});
+  // ---- warm the royal pages in the background, a few at a time, so they open at once ----
+  // Clips are fetched whole and handed to the page as local blobs. Skipped on data saver / very slow links.
+  const cn=navigator.connection||{},thrifty=cn.saveData||/(^|-)2g$/.test(cn.effectiveType||'');
+  window.__clips=window.__clips||{};
+  const CLIPFILE={opening:'clip-page-1',family:'clip-page-2',bhaat:'clip-page-bhaat',haldi:'clip-page-haldi',dinner:'clip-page-3',venue:'clip-page-4'};
+  const queue=[];let pfBusy=false;
+  function pump(){if(pfBusy||!queue.length)return;pfBusy=true;const key=queue.shift();
+    fetch('scene/'+CLIPFILE[key]+'.mp4',{priority:'low'}).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{window.__clips[key]=URL.createObjectURL(b)}).catch(()=>{}).finally(()=>{pfBusy=false;setTimeout(pump,120)});
+    fetch('scene/'+key+'.html').catch(()=>{});}
+  function want(keys){if(thrifty)return;keys.filter(k=>ORDER.includes(k)&&!queue.includes(k)&&!window.__clips[k]).forEach(k=>queue.push(k));pump()}
+  const lit=()=>!document.body.classList.contains('locked');
+  const litT=setInterval(()=>{if(lit()){clearInterval(litT);setTimeout(()=>want(['opening','family']),3500)}},500);
+  [['#celebrations',['bhaat','haldi','dinner']],['#location',['venue']]].forEach(([sel,keys])=>{const el=$(sel);if(el)new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();want(keys)}}),{rootMargin:'160% 0px'}).observe(el)});
   // have the paintings' first frames ready before anyone asks for them
   const sec=$('#royal');if(sec)new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
     ORDER.forEach(key=>{const im=new Image();im.src='scene/'+INFO[key][0]+'.jpg'})}),{rootMargin:'100% 0px'}).observe(sec);
